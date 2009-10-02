@@ -1,0 +1,744 @@
+###############################################################
+# zshrc
+# $Id: zshrc 6 2009-06-17 09:03:30Z fv $
+# My zshrc file. 
+# fv <f.visconte@gmail.com>
+#
+#
+#
+#---- a sample 'per-os' widget----------
+#
+#		####################
+#		##### linux ########
+#		####################
+#	if [ `uname` = Linux ]; then
+#	
+#	fi
+#		####################
+#		##### freebsd ######
+#		####################
+#	if [ `uname` = FreeBSD ]; then
+#		export BLOCKSIZE=K
+#		export CLICOLOR=enable
+#	
+#	fi
+#		####################
+#		##### openbsd ######
+#		####################
+#	if [ `uname` = OpenBSD ]; then
+#		alias reverse_mode="vidcontrol black white white black"
+#		export BLOCKSIZE=K
+#		export CLICOLOR=enable
+#	fi
+#
+# There is a function named myhelp(). This function parse this file and search for lines 
+# matching "^#D: ", then print the rest of the line.
+# I use this function to display documentation of my defined functions...
+#
+#
+
+
+
+###################################################################################################################
+#################################  environment variables ##########################################################
+###################################################################################################################
+
+#### Shell prompt 
+PS1="%B%n@%m%b%~%$PR_STITLE% "
+# PS1="%B%n@%m%b(%(?:%{$fg[green]%}%?:%{$fg[red]%}%?)%{$reset_color%})~%% "
+
+#### History variables
+HISTSIZE=1000
+HISTFILE="$HOME/.zsh_history"
+SAVEHIST=1000
+
+#### Homedir 
+#HOMEDIR=/home/fv
+
+#### Dot file to backup 
+# DOT_LIST=.zshrc .screenrc .gconf .vim .vimrc .fvwm* .screenrc .vimrc .ssh/id_rsa.pub
+#MERGABLE_DOT_FILES=".zshrc .fluxbox/startup .vimrc"
+
+
+#### favorite editor 
+if which vim; then 
+	EDITOR=vim 
+else 
+	EDITOR=vi
+fi
+
+#### favorite browser 
+
+if which w3m; then 
+	TEXTBROWSER=w3m
+elif which elinks ; then 
+	TEXTBROWSER=elinks
+elif which links ; then 
+	TXTBROWSER=links
+elif which lynx ; then 
+	TEXTBROWSER=lynx
+fi
+
+if which firefox; then 
+	XBROWSER='firefox'
+elif which mozilla; then 
+	XOPENURL='mozilla'
+fi
+
+			
+if which thunderbird;then
+    XMAIL='thunderbird'
+elif which 'mozilla-thunderbird'; then 
+    XMAIL='mozilla-thunderbird'
+fi
+
+
+
+#### pager and manpager ( replaced with man function and myless function )
+
+
+# path
+if [ -d ~/bin ]; then 
+	PATH=$PATH:~/bin
+fi
+export PATH
+
+
+##### Some other dummy variables 
+
+
+	####################
+	##### linux ########
+	####################
+if [ `uname` = Linux ]; then
+    if which vim; then 
+		PAGER="less" 
+        #"vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' "$@""
+		# MANPAGER="col -b | vim  -c 'set ft=man nomod nolist' -"
+        #runtime! macros/less.vim' -"
+    fi
+fi
+
+	####################
+	##### freebsd ######
+	####################
+if [ `uname` = FreeBSD ]; then
+	export BLOCKSIZE=K
+	export CLICOLOR=enable
+    MANPAGER=""
+
+fi
+	####################
+	##### openbsd ######
+	####################
+if [ `uname` = OpenBSD ]; then
+	alias reverse_mode="vidcontrol black white white black"
+	export BLOCKSIZE=K
+	export CLICOLOR=enable
+    MANPAGER=""
+    # vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' -"
+            
+fi
+
+
+
+export PS1 PAGER EDITOR SAVEHIST HISTFILE HISTSIZE MANPAGER
+export LSCOLORS='cxgxhxhxbxhxhxbabacaca'
+
+
+
+###################################################################################################################
+#################################  system settings ################################################################
+###################################################################################################################
+
+# No messy core dumps!
+ulimit -c 0
+# Set up the file creation mask
+# umask 022
+
+
+
+###################################################################################################################
+############################### per os aliases  ###################################################################
+###################################################################################################################
+# some usefull aliases 
+
+alias ls='/bin/ls -Ft $LS_OPT2'
+
+if which vim; then 
+	alias less='myless'
+else
+	alias less='less -X -M'
+fi
+
+
+alias dh="dirs -v"
+alias find='noglob find'
+alias sshclean='rm ~/.ssh/known_hosts'
+alias ssh='ssh  -o "PasswordAuthentication=yes"'
+alias pmake='pmake -I ~/lib/mk/'
+
+alias -s txt=$EDITOR
+alias -s pdf=xpdf
+alias -s gz=archinfo
+alias -s bz2=archinfo
+alias -s tbz=archinfo
+alias -s tgz=archinfo
+alias -s bz=archinfo
+alias -s vim=vim
+alias -s c=vim
+alias -s h=vim
+
+hosts=("${(s: :)${(s:   :)${${(f)$(</etc/hosts)}%%\#*}#*[       ]*}}")
+groups=( "${${(f)$(</etc/group)}%%:*}" )
+
+
+# FreeBSD aliases 
+if [ `uname` = FreeBSD ]; then
+	alias dev_mode="vidcontrol -f 8x8 /usr/sh鉹e/s齭c鴑s/f鴑ts/swiss-8x8.fnt 80x60"
+	alias dev_mode2="vidcontrol -f 8x8  /usr/sh鉹e/s齭c鴑s/f鴑ts/c�4�7-thin-8x8.fnt"
+	alias reverse_mode="vidcontrol black white white black"
+fi
+
+
+
+
+###################################################################################################################
+############################### completion stuff ##################################################################
+###################################################################################################################
+
+
+compctl -D -f + -H 0 '' -X '(No file found; using history)'
+compctl -o setopt
+compctl -v echo export
+compctl -z -P '%' bg
+compctl -j -P '%' fg jobs disown
+compctl -j -P '%' + -s '`ps -x | tail +2 | cut -c1-5`' wait
+compctl -A shift
+# compctl -c type whence where which whereis killall man apropos
+compctl -/g '*(*)' strip gprof adb dbx xdbx ups
+compctl -/g '*.[ao]' -/g '*(*)' nm
+compctl -j -P '%' + -s '`ps -x | tail +2 | cut -c1-5`' + \
+		-x 's[-] p[1]' -k "($signals[1,-3])" -- kill
+compctl  -k my_process killall
+
+# Some features for system administrators. Ordinary users 
+# can delete the next three.
+compctl -s '$(groups)' + -k groups newgrp
+compctl -f -x 'p[1], p[2] C[-1,-*]' -k groups -- chgrp
+compctl -f -x 'p[1] n[-1,.], p[2] C[-1,-*] n[-1,.]' -k groups - \
+		'p[1], p[2] C[-1,-*]' -u -S '.' -q -- chown
+compctl -u -x 's[+] c[-1,-f],s[-f+]' -W ~/Mail -f - \
+		's[-f],c[-1,-f]' -f -- mail elm
+
+
+# This is handy, it lets dd complete options which start 
+# with something=filename.
+compctl -k '(if of conv ibs obs bs cbs files skip file seek count)' \
+		-S '=' -x 's[if=], s[of=]' -f - 'C[0,conv=*,*] n[-1,,], s[conv=]' \
+		-k '(ascii ebcdic ibm block unblock lcase ucase swap noerror sync)' \
+		-q -S ',' - 'n[-1,=]' -X '<number>' -- dd
+
+
+if [ `uname` = Linux ] ; then
+	compctl -g "*.tif *.tiff *.GIF *.JPG *.xcf *.gif *.jpg *.bmp\
+			 *.xpm *.xbm *.pgm *.pcx *.ppm *.pnm *.png *.ps"\
+			+ -g "*(-/) .*(-/)" gimp
+	compctl -g "*.tif *.tiff *.GIF *.JPG *.gif *.jpg *.bmp\
+			*.xpm *.xbm *.pcx *.pgm *.ppm *.pnm *.png"\
+			+ -g "*(-/) .*(-/)" display convert zgv
+	compctl -g "*.ps *.PS *.pdf *.eps" + -g "*(-/) .*(-/)" mgv gv
+	compctl -g "*.pdf" + -g "*(-/) .*(-/)" xpdf gpdf 
+	compctl -g "*.avi *.fli *.mov *.mpg" + -g "*(-/) .*(-/)" xanim
+	compctl -g "*.psf *.fnt *.cp *8 *9 *14 *16" setfont
+	compctl -g "*.bz2" + -g "*(-/) .*(-/)" bunzip2
+	compctl -g "*.mid *.midi" + -g "*(-/) .*(-/)"\
+			timidity xplaymidi playmidi mi2mu
+	compctl -g "*.rose" + -g "*(-/) .*(-/)" rosegarden
+	compctl -g "*.ly" + -g "*(-/) .*(-/)" lilypond
+	compctl -g "*.deb" + -g "*(-/) .*(-/)" dpkg
+	compctl -g "*.rpm" + -g "*(-/) .*(-/)" rpm2cpio rpm
+	compctl -g "*.deb *.rpm *.tgz" + -g "*(-/) .*(-/)" alien
+	compctl -g "*.exe *.Exe *.EXE" + -g "*(-/) .*(-/)" wine
+	compctl -g "*.lyx" + -g "*(-/) .*(-/)" lyx
+	compctl -g "*.wav *.au" + -g "*(-/) .*(-/)" play
+	compctl -g "*.wav *.au" + -g "*(-/) .*(-/)" xwave
+	compctl -g "*.wav *.au" + -g "*(-/) .*(-/)" mxv
+	compctl -g "*.mp3 *.mp2" + -g "*(-/) .*(-/)"\
+			mpg123 freeamp xmms x11amp
+	compctl -g "*.mpg" + -g "*(-/) .*(-/)" mtv mtvp smpeg
+	compctl -g "*.map" + -g "*(-/) .*(-/)"\
+			squest xquest vis qbsp light
+	compctl -g "*.xml" + -g "*(-/) .*(-/)"\
+			glade glade-- mozilla
+fi
+
+
+
+# These should be available on most Unix systems.
+
+compctl -g "*.tif *.tiff *.GIF *.JPG *.gif *.jpg *.bmp *.xpm *.xbm\
+		*.pcx *.pgm *.ppm *.pnm *.png" + -g "*(-/) .*(-/)" xv
+compctl -g "*.pdf *.PDF" + -g "*(-/) .*(-/)" xpdf gpdf 
+compctl -g "*.ps *.PS *.pdf *.PDF *.eps" + -g "*(-/) .*(-/)" ghostview gs gv ggv
+compctl -g "*.gr" + -g "*(-/) .*(-/)" groff
+compctl -g "*.c" + -g "*(-/) .*(-/)" gcc cc
+compctl -g "*.cc *.CC *.cpp *.C" + -g "*(-/) .*(-/)" g++ CC
+compctl -g "*.fig" + -g "*(-/) .*(-/)" xfig
+compctl -g "*.gz" + -g "*(-/) .*(-/)" gunzip
+compctl -g "*.gz *.Z *.zip" + -g "*(-/) .*(-/)" zless zgrep zcat
+compctl -g "*.zip" + -g "*(-/) .*(-/)" unzip
+compctl -g "*.Z" + -g "*(-/) .*(-/)" uncompress
+compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz" \
+		+ -g "*(-/) .*(-/)" tar
+compctl -g "*.a *.deb" + -g "*(-/) .*(-/)" ar
+compctl -g "*.tex" + -g "*(-/) .*(-/)"\
+		tex latex pdftex pdflatex bibtex latex2html
+compctl -g "*.dvi" + -g "*(-/) .*(-/)" xdvi dvips
+# Look for html files, then directories, then history
+compctl -g "*.html *.htm" + -g "*(-/) .*(-/)" + -H 0 ''\
+		netscape lynx wget opera
+# You would never want telnet to cycle through files, 
+# this cycles through the history instead. Likewise 
+# with ftp, ssh etc.
+compctl -H 0 '' -k hosts telnet ftp ssh host nslookup rup rusers
+# This one is very handy: ensures that cd <tab> cycles 
+# through directories (including "hidden" .directories) 
+# only. Likewise rmdir.
+compctl -g "*(-/) .*(-/)" cd rmdir
+# Make home, insert, delete and end work on PCs basically 
+# like in doskey. This may or may not work for you... the 
+# \e is the ESC character. To set this up for your favourite 
+# system, type cat > rubbish, press the keys of interest, 
+# then enter here what you see. You should replace ^[ 
+# (escape) with \e.
+
+
+
+
+
+###################################################################################################################
+############################### key bindings ######################################################################
+###################################################################################################################
+
+bindkey "\C1" beginning-of-line
+bindkey "\CH" beginning-of-line
+bindkey "" transpose-words
+bindkey "" delete-char
+bindkey "\C$" end-of-line
+bindkey "\Ca" backward-delete-word
+bindkey "\Cf" backward-kill-line
+bindkey "" history-incremental-search-backward
+
+
+
+###################################################################################################################
+############################### options ###########################################################################
+###################################################################################################################
+
+setopt printeightbit
+setopt ALL_EXPORT
+setopt CORRECT
+setopt MENU_COMPLETE
+setopt EXTENDED_GLOB
+setopt AUTO_PARAM_SLASH
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
+
+# This makes the shell give immediate notice of 
+# changes in job status, which is my preference.
+setopt NOTIFY
+
+setopt autopushd pushdminus pushdsilent
+setopt pushdtohome 
+
+#setopt <ESC-P>
+#unsetopt GLOB_RCS
+
+###################################################################################################################
+############################### other zsh setting install #########################################################
+###################################################################################################################
+
+zstyle ':completion:*' completer _expand _complete
+zstyle :compinstall filename $HOME'/.zshrc'
+
+autoload -U colors 
+colors
+autoload -U compinit
+compinit
+
+
+###################################################################################################################
+############################### other zsh local settings install ##################################################
+###################################################################################################################
+
+for i in $HOME/.zshrc_local $HOME/.zlocal; do
+if [ -e $i ]; then 
+	echo "Sourcing $i" 
+	source $i
+fi 
+done
+
+
+
+###################################################################################################################
+############################### shell-statup-commands #############################################################
+###################################################################################################################
+
+if which keychain 1>/dev/null 2>&1; then
+	keychain id_rsa -q 
+	host=`uname -n ` 
+	[ -f $HOME/.keychain/$host-sh ] && source $HOME/.keychain/$host-sh
+fi
+
+
+###################################################################################################################
+##############################  some functions ####################################################################
+###################################################################################################################
+
+# function to reload completion FIXME
+function recomp {
+	echo "Reloading zsh completion (compinit)"
+	if [ -e $HOME/.zcompdump ]; then
+		rm .zcompdump
+	fi
+	if [ -e $HOME/.zcompdump.$HOST ]; then 
+		rm .zcompdump.$HOST*
+	fi
+	unfunction compinit; autoload -U compinit; 
+}
+
+
+
+
+# dummy function to pack my dot-files 
+function dotspack () {
+    set -x
+	cur_date=$(date +"%k%M-%d%m-%Y")
+
+	dot_archive="dot-files-$USER-$cur_date"
+	dots_tmp=.tmp-dots-$cur_date
+	cd $HOME
+	mkdir $dots_tmp
+	for i in $DOT_LIST; do 
+        echo "Packing $i"
+		#if [ -e $i ]; then 
+		cp -fv $i $dots_tmp/
+		#fi
+	done
+	mv $dots_tmp $dot_archive
+	tar jcvf $dot_archive.tar.bz2 $dot_archive
+	rm -rf $dot_archive
+}
+
+function dotmerge () {
+    archive_file=$1
+    dots_tmp=.tmp-dotmerge
+    mkdir -p $dots_tmp
+    
+}
+
+function title {
+    if [[ $TERM == "screen" ]]; then
+        print -nR $'\033k'$1$'\033'\\\
+        print -nR $'\033]0;'$2$'\a'
+    elif [[ $TERM == "xterm" || $TERM == "rxvt" ]]; then
+            print -nR $'\033]0;'$*$'\a'
+    fi
+}
+
+
+
+# Used to update my 
+#D: precmd: used for precommand 
+#
+precmd () {
+	if [[ "$HOST" == "" ]]; then 
+		export HOST=$HOSTNAME
+	fi
+	if [[ "$TERM" == "screen" ]]; then 
+		echo -ne "\ek$USER@$HOST\e\\"
+  #     title $HOST screensession
+ #      title $HOST $PWD
+	fi
+#     echo -ne "\033]0;$HOME:$TERM\007"
+
+}
+
+# replace less with vim, very usefull for syntax highligting
+#D: myless: a wrapper for less
+function myless () {
+
+	if [[ $# -eq 0 ]] ; then
+		vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' -
+	else
+	    vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' "$@"
+	fi
+	
+}
+
+#function man () {
+#      command man $* | col -b | vim -c 'set ft=man' -c 'set nomod' -
+#
+#}
+
+# dummy function to make a web search 
+#D: google: search google for a word
+function google () {
+
+	for i in $@;do 
+		if [ "x$QUERY" != "x" ]; then 
+			QUERY="$QUERY+$i"
+		else 
+			QUERY="$i"
+		fi
+	done
+	
+	if [[ "x$DISPLAY" == "x" ]]; then 
+		$TEXTBROWSER "http://www.google.com/search?q=$QUERY"
+	else 
+		$XBROWSER -remote "openurl(http://www.google.com/search?q=$QUERY)"
+	fi
+}
+
+#D: archinfo: try to extract an arbitrary function
+function archinfo () {
+	if [[ "$1:e" == "gz" || "$1:e" == "tgz" ]]; then 
+		tararg="z"
+	elif [[ "$1:e" == "tbz" || "$1:e" == "bz2" || "$1:e" == "bz" ]]; then 
+		tararg="j"
+	else 
+		echo "Bad archive ? "
+		exit 1
+	fi
+	
+	if [[ "$2" == "-x" ]]; then 
+		tar xvf$tararg $1
+	else
+		tar tvf$tararg $1
+	fi
+
+}
+
+#D: kil: kil a program trying multiple signals
+function kil () {
+
+    PID=$1
+        RETVAL=0
+
+    for signal in "TERM" "INT" "HUP" "KILL"; do
+         kill -$signal $PID
+          RETVAL=$?
+         [ $RETVAL -eq 0 ] && break
+         echo "warning: kill failed: pid=$PID, signal=$signal" >&2
+         sleep 1
+    done
+return $RETVAL
+}
+
+
+#D: pkil: kill a program trying multiple signals
+function pkil () {
+
+    PNAME=$1
+    RETVAL=0
+
+    for signal in "TERM" "INT" "HUP" "KILL"; do
+         pkill -$signal $PNAME
+          RETVAL=$?
+         [ $RETVAL -eq 0 ] && break
+         echo "warning: kill failed: pname=$PNAME, signal=$signal" >&2
+         sleep 1
+    done
+return $RETVAL
+}
+
+
+
+
+
+#D: thmail: Open thunderbird and write an email
+function thmail () {
+	
+	for i in $@;do 
+		if [ "x$QUERY" != "x" ]; then 
+			QUERY="$QUERY,$i"
+		else 
+			QUERY="$i"
+		fi
+	done
+	
+	thunderbird -remote "mailto($QUERY)"
+}
+
+
+#D: myhelp: Print builtins function documentation
+function myhelp () {
+    echo 
+    echo "Personal builtin commands from zshrc: "
+    echo 
+    grep "^#D: " $HOME/.zshrc | awk -F"#D: " '{print "\t"$2""}' | sed 's/: /:\t/g'
+    echo ""
+    
+    echo $HELP
+}
+
+
+
+function apply_dots () {
+    DOTARCH=$1:t
+    DOTTMP=/tmp/dots-$USER
+    rm -rf $DO TMP
+    mkdir $DOTTMP
+    chmod 700 $DOTTMP
+    
+    if [[ "$1:e" == "gz" || "$1:e" == "tgz" ]]; then
+            gzip -d $1
+    elif [[ "$1:e" == "tbz" || "$1:e" == "bz2" || "$1:e" == "bz" ]]; then
+            bzip2 -d $1
+    else
+        return
+    fi
+
+    tar xf ${1:r:r}.tar -C $DOTTMP   
+    DOTDIR=${DOTARCH:r:r:r}
+    cd $DOTTMP/$DOTDIR
+    IFS="
+"
+
+    for i in $(grep "^~ " FILES); do
+        SRC=`echo $i | awk '{print $2}'`
+        DST=`echo $i | awk '{print $3}'`
+        echo "$SRC --> ~/$DST"
+        merge_conf $SRC $HOME/$DST
+    done
+
+    grep "^[^~]" FILES | while read i; do
+        
+        SRC=`echo $i | awk '{print $1}'`
+        DST=`echo $i | awk '{print $2}'`
+        echo "$SRC --> ~/$DST"
+        if [ -d $SRC ]; then 
+            mkdir -p $HOME/$DST
+        else
+            cp $SRC $HOME/$DST
+        fi
+    done 
+}
+
+
+function merge_conf () {
+    NEWFILE=$1
+    OLDFILE=$2
+    if [ ! -e "$2" ]; then 
+        echo "$2 does not exists, copying"
+        cp $1 $2
+        return
+    fi
+    diff -u $1 $2 1>&/dev/null
+    if [ $? -eq 0 ]; then 
+        echo "$1 and $2 are the same files."
+        return 
+    fi
+    cp $1 $2.new
+    diff -u $2 $2.new | more
+    echo "What do you want ? (Edit/Install/Skip)"
+    read RESP
+    case "$RESP" in
+        e|E|edit|Edit)
+        if which vimdiff; then 
+            vimdiff $2.new $2
+        else 
+            vi $2.new
+        fi
+        echo "Installing $2."
+        mv $2 $2.old
+        mv $2.new $2
+        ;;
+        i|I|Install|install)
+        mv $2 $2.old
+        mv $2.new $2
+        ;;
+        *)
+        return
+        ;;
+    esac
+}
+
+function tgzts () {
+    for directory in $@; do
+        tar zcvf $directory-$(date +"%Y%m%d").tar.gz $directory
+    done
+}
+
+function tbzts () {
+    for directory in $@; do
+        tar jcvf $directory-$(date +"%Y%m%d").tar.bz2 $directory
+    done
+}
+
+#D: sreen-output: show screenfeeder output
+function screen-output () {
+    
+    screenfeeder_fifo=$HOME/.screenfeeder/screenfeeder.fifo
+    
+    while true ; do 
+        cat $screenfeeder_fifo
+    done
+}
+
+#D: screencat: insert some text in screenfeeder
+function screencat () {
+    screenfeeder_fifo=$HOME/.screenfeeder/screenfeeder.fifo
+    while read FOO; do 
+        echo $FOO > $screenfeeder_fifo
+    done
+}    
+
+
+#D: fetchmergemaster: fetch FreeBSD mergemaster tarball 
+function fetchmergemaster () {
+    mergemasterpath="http://grappa.unix-ag.uni-kl.de/~naddy/mergemaster-1.46.tar.gz"
+
+    wget $mergemasterpath
+
+
+}
+
+
+#D: svnkwset: set basic svn keywords on a file
+function svnkwset () {
+    kw="LastChangedDate Author LastChangedRevision LastChangedBy HeadURL Id"
+    echo "Setting the following keywords on $@: $kw"
+    svn propset svn:keywords $kw $@
+}
+
+HELP="
+    fv\'s zsh documentation 
+    -----------------------
+
+zshrc aliases
+--------------
+    ./file.txt -> vim file.txt
+    ./archive.(zip,tgz,tar.gz,tar.bz2) -> tar ztvf archive.xx
+    ./archive.tgz -x -> tar zxvf 
+$(alias | awk -F= '{print "    "$1" -> "$2}')
+
+tips and tricks
+---------------
+    
+    globbing
+    -------- 
+
+    ls **                   recursive ls 
+    ls *c~[fp]*             all *.c and not begining with 'f' or 'p'
+    ls rfc-<34-63>.txt      rfc from 34 to 63
+    ls *(^/)                all but directorys
+    ls **(^u[root])         all but root's files
+
+
+"

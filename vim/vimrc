@@ -1,0 +1,218 @@
+"===============================================================================================
+" vimrc
+" $Id: vimrc 5 2009-06-17 08:58:57Z fv $
+" fv <f.visconte@gmail.com>
+"
+"
+"
+"
+"===============================================================================================
+set runtimepath=~/.vim,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/addons,/usr/share/vim/vim53,/usr/share/vim/vimfiles,/usr/share/vim/addons/after,~/.vim/after,/usr/share/vim/vim70,/usr/share/vim/vimcurrent,/Applications/MacVim.app/Contents/Resources/vim/runtime/,/usr/share/vim/vim62/
+
+set nocompatible                  " Use Vim defaults instead of 100% vi compatibility
+set backspace=indent,eol,start    " more powerful backspacing
+set autoindent                    " always set autoindenting on
+set cursorline
+" set cursorcolumn
+" hi cursorline guibg=#757575
+" hi CursorColumn guibg=#757575
+" set linebreak                    " Don't wrap words by default
+set textwidth=0                    " Don't wrap lines by default 
+set nobackup                       " Don't keep a backup file
+set viminfo='20,\"50               " read/write a .viminfo file, don't store more than
+set history=50                     " keep 50 lines of command line history
+set ruler                          " show the cursor position all the time
+set clipboard=autoselect           " clipboard
+set confirm                        " confirm before quitting unsaved 
+set expandtab 
+set shiftwidth=4
+set hidden                         "keep all file in memorie
+set ignorecase                     " ignore case when searching
+set modeline
+set modelines=5
+set encoding=utf-8
+set nofoldenable                    " do not enable folding by default
+set showcmd                         " Show (partial) command in status line.
+set showmatch                       " Show matching brackets.
+set incsearch                       " Incremental search
+set matchpairs=(:),{:},[:],<:>
+set matchtime=2                     " 20ms matchtime
+set title                           " change terminal title
+set whichwrap=b,s,h,l,<,>,[,]       " when moving my cursor, wrap in all cases (don't get stuck at end of line, etc)
+set wildmode=longest:list,full      " make file completion like bash 
+set wildmenu                        " show a list of file when completing 
+set hlsearch                        " hilight search patern 
+set report=0                        " allways report changes in file
+set ruler                           " enable ruller
+set ai                              " enable autoindent 
+set backupdir=/tmp          
+set visualbell t_vb=""              " visual bell
+set cmdheight=1                    " cmd line height
+set statusline=%58(%-15t\ \ %Y%M\ \ #%2n\ \ %3v,%-3l\ of\ %L\ \ %5P%)
+set laststatus=2            
+set shell=zsh               " my shell 
+set ttyfast                 " i'm fast
+set tabstop=4                    
+set shiftwidth=4                   " shift width 
+set softtabstop=4           " soft tabs
+set scrolloff=8             " scroll buffer 8 line before/after
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+set wrap                    " wrap long lines
+
+
+filetype plugin on                 " activate plugins by default 
+syntax on                   " Syntax hilighting by default
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" some functions 
+" --------------
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+    if exists("g:qfix_win") && a:forced == 0
+        cclose
+    unlet g:qfix_win
+    else
+        copen 10
+        let g:qfix_win = bufnr("$")
+    endif
+endfunction 
+
+
+function! MyPersonalHelp()
+    if exists("g:help_win") 
+        bdelete ~/.vim/my_helpfile
+        unlet g:help_win
+    else
+        let g:help_win = bufnr("$")
+        split ~/.vim/my_helpfile
+    endif
+endfunction
+
+function! Edit_Todolist()
+    if exists("g:todo_edited")
+        bdelete ~/TODO
+        unlet g:todo_edited
+    else
+        let g:todo_edited = bufnr("$")
+        30vsplit ~/TODO
+    endif
+endfunction
+
+function! Insert_datetime()
+     let @i = strftime("%A, %d %b %Y, %I:%M") . tolower(strftime("%p"))
+      normal "igp
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" key mapping 
+" -----------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map ;e :QFix<CR> 
+map ;q :bp<CR>
+map ;w :bn<CR>
+map ;v gg=G<CR>
+map ;n :set nu<CR>
+map ;b :make<CR>
+map ;u :set nonu<CR>
+map ;a :TlistToggle<CR>
+map ;f :fold<cr>
+map ;c :e ~/.vimrc<CR>
+map ;s :sh<CR>
+map ;h :call MyPersonalHelp()<CR>
+map <F11> :call Insert_datetime()<CR>
+map ;fl :TMiniBufExplorer<CR>
+
+
+let mapleader=","
+let maplocalleader="_"
+
+
+" command! EditTodo :call Edit_Todolist()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" filetype specific settings 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+if has("autocmd")
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent loadview 
+
+    augroup cdev
+        au!
+        autocmd Filetype c,cpp set noautoindent cindent formatoptions=croql shiftwidth=2 softtabstop=2 textwidth=78 wrapmargin=3
+        " C / C++ related configuration ----------------------------------------------------------------------------------   
+        autocmd FileType c,cpp,java,perl :set cindent
+        autocmd FileType c,cpp
+        autocmd FileType cpp iabbrev //- //------------------------------------------------------------------------- 
+        autocmd Filetype c,cpp,java  iabbrev /*-  /*----------------------------------------------------------------------*/
+        autocmd FileType c,cpp set omnifunc=ccomplete#Complete 
+        autocmd FileType c,cpp set makeprg=make
+    augroup END
+    
+
+    augroup pydev 
+        au!
+
+        """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" Python related 
+        autocmd FileType python set omnifunc=pythoncomplete#Complete
+        autocmd Filetype python iabbrev ## ####################################################################
+        " autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
+        autocmd FileType python im :<CR> :<CR><TAB>
+    augroup END
+    
+    augroup xmlhtml
+        au!
+        autocmd FileType xml set makeprg=xmllint\ %\ 1>\ /dev/null
+        autocmd FileType xml set efm=%f:%l:\ %m
+    augroup END
+
+    augroup processing
+        au!
+        autocmd BufRead *.pde set ft=pde
+        autocmd FileType pde let processing_doc_path=/home/fv/processing-1.0.5/reference
+    end
+
+
+    augroup javadev
+        au!
+        """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" Java Related
+        autocmd BufRead *.java set makeprg=ant
+        autocmd BufRead *.java set efm=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#
+
+    end   
+
+    " au filetype xml map! ;f :%s/\n//g<cr>:%!xmllint --format %<CR>    
+    " au filetype xml map! ;f :!xmllint --format % \| perl -ne 'if( $_ =~ /.*?([\s\|\t]*)<title>(.*)<\/title>/i ){ print $1."* ".$2."\n"; }'<CR>
+    " au filetype xml map! ;v :!xmllint --noout %<CR>
+    " au filetype xml set nowrap
+    " to automatically do language-dependent indenting add 'indent' as well.
+    " au BufNewFile,BufRead cf.*    set filetype=cfengine
+    " au BufNewFile,BufRead *mutt* set filetype=stxt
+
+    " au BufNewFile,BufRead *.txt set textwidth=60
+
+endif " Has autocmd
+
+
+
+" let us view mapages 
+runtime ftplugin/man.vim
+
+
+
+" GUI specific things
+" -------------------------------------------------------------------------
+"
+"
+
+
+if has("gui_running")
+    colo ironman
+    " metacosm
+endif
