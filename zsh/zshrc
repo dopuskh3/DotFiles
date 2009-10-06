@@ -188,6 +188,7 @@ alias -s bz=archinfo
 alias -s vim=vim
 alias -s c=vim
 alias -s h=vim
+alias "o"="xdg-open"
 
 hosts=("${(s: :)${(s:   :)${${(f)$(</etc/hosts)}%%\#*}#*[       ]*}}")
 groups=( "${${(f)$(</etc/group)}%%:*}" )
@@ -313,8 +314,12 @@ compctl -g "*(-/) .*(-/)" cd rmdir
 # then enter here what you see. You should replace ^[ 
 # (escape) with \e.
 
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
 
-
+zstyle ':completion:*:processes' command 'ps -au$USER'
+zstyle ':completion:*:processes-names' command 'ps -e -o comm='
+zstyle ':completion:*' verbose yes
 
 
 ###################################################################################################################

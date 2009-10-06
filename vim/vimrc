@@ -7,7 +7,7 @@
 "
 "
 "===============================================================================================
-set runtimepath=~/.vim,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/addons,/usr/share/vim/vim53,/usr/share/vim/vimfiles,/usr/share/vim/addons/after,~/.vim/after,/usr/share/vim/vim70,/usr/share/vim/vimcurrent,/Applications/MacVim.app/Contents/Resources/vim/runtime/,/usr/share/vim/vim62/
+set runtimepath=~/.vim,/etc/vim,/usr/share/vim/vimfiles,/usr/share/vim/addons,/usr/share/vim/vim53,/usr/share/vim/vimfiles,/usr/share/vim/addons/after,~/.vim/after,/usr/share/vim/vim70,/usr/share/vim/vimcurrent
 
 set nocompatible                  " Use Vim defaults instead of 100% vi compatibility
 set backspace=indent,eol,start    " more powerful backspacing
