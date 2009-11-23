@@ -3,12 +3,13 @@ $ =============================================================
 $ ========== USER MACROS ======================================
 $ =============================================================
 $
-|AUTHOR|    = f.visconte
+|AUTHOR|    = Francois Visconte
 |AUTHORREF| = 
-|EMAIL|     = francois.visconte@milpix.com 
-|COMPANY|   = milpix 
+|EMAIL|     = f.visconte@gmail.com
+|COMPANY|   =  
 |COPYRIGHT| = Copyright (c) |YEAR|, |AUTHOR|
 |STYLE|     = CPP
+|WEB|       = http://digitalork.blogspot.com, http://github.com/dopuskh3
 $
 $ =============================================================
 $ ========== FILE INCLUDES ====================================

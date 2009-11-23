@@ -145,12 +145,12 @@ if has("autocmd")
 
     augroup cdev
         au!
-        autocmd Filetype c,cpp set noautoindent cindent formatoptions=croql shiftwidth=2 softtabstop=2 textwidth=78 wrapmargin=3
+        autocmd Filetype c,cpp set noautoindent cindent formatoptions=croql shiftwidth=2 softtabstop=2 textwidth=90 wrapmargin=3
         " C / C++ related configuration ----------------------------------------------------------------------------------   
         autocmd FileType c,cpp,java,perl :set cindent
         autocmd FileType c,cpp
-        autocmd FileType cpp iabbrev //- //------------------------------------------------------------------------- 
-        autocmd Filetype c,cpp,java  iabbrev /*-  /*----------------------------------------------------------------------*/
+        autocmd FileType cpp iabbrev //- //---------------------------------------------------- 
+        autocmd Filetype c,cpp,java  iabbrev /*-  /*-------------------------------------------------*/
         autocmd FileType c,cpp set omnifunc=ccomplete#Complete 
         autocmd FileType c,cpp set makeprg=make
     augroup END
@@ -164,6 +164,8 @@ if has("autocmd")
         autocmd Filetype python iabbrev ## ####################################################################
         " autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
         autocmd FileType python im :<CR> :<CR><TAB>
+        autocmd FileType python compiler pylint
+        autocmd FileType python let g:pylint_onwrite = 0
     augroup END
     
     augroup xmlhtml
@@ -176,7 +178,7 @@ if has("autocmd")
         au!
         autocmd BufRead *.pde set ft=pde
         autocmd FileType pde let processing_doc_path=/home/fv/processing-1.0.5/reference
-    end
+    augroup END
 
 
     augroup javadev
@@ -185,7 +187,7 @@ if has("autocmd")
         autocmd BufRead *.java set makeprg=ant
         autocmd BufRead *.java set efm=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#
 
-    end   
+    augroup END   
 
     " au filetype xml map! ;f :%s/\n//g<cr>:%!xmllint --format %<CR>    
     " au filetype xml map! ;f :!xmllint --format % \| perl -ne 'if( $_ =~ /.*?([\s\|\t]*)<title>(.*)<\/title>/i ){ print $1."* ".$2."\n"; }'<CR>
@@ -214,5 +216,6 @@ runtime ftplugin/man.vim
 
 if has("gui_running")
     colo ironman
+    set guioptions+=m
     " metacosm
 endif
