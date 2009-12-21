@@ -577,7 +577,7 @@ function thmail () {
 		fi
 	done
 	
-	thunderbird -remote "mailto($QUERY)"
+	thunderbird-3.0 -remote "mailto($QUERY)"
 }
 
 

@@ -58,6 +58,7 @@ set softtabstop=4           " soft tabs
 set scrolloff=8             " scroll buffer 8 line before/after
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set wrap                    " wrap long lines
+set nocp
 
 
 filetype plugin on                 " activate plugins by default 
@@ -137,7 +138,7 @@ let maplocalleader="_"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " filetype specific settings 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+let OmniCpp_ShowPrototypeInAbbr = 1
 
 if has("autocmd")
     autocmd BufWinLeave *.* mkview
@@ -145,14 +146,16 @@ if has("autocmd")
 
     augroup cdev
         au!
-        autocmd Filetype c,cpp set noautoindent cindent formatoptions=croql shiftwidth=2 softtabstop=2 textwidth=90 wrapmargin=3
         " C / C++ related configuration ----------------------------------------------------------------------------------   
         autocmd FileType c,cpp,java,perl :set cindent
         autocmd FileType c,cpp
         autocmd FileType cpp iabbrev //- //---------------------------------------------------- 
         autocmd Filetype c,cpp,java  iabbrev /*-  /*-------------------------------------------------*/
-        autocmd FileType c,cpp set omnifunc=ccomplete#Complete 
+        " autocmd FileType c,cpp set omnifunc=ccomplete#Complete 
         autocmd FileType c,cpp set makeprg=make
+        " omnicompletion stuffs : 
+        autocmd FileType c,cpp map ;c :!ctags -R .<CR>
+        autocmd Filetype c,cpp set noautoindent cindent formatoptions=croql shiftwidth=2 softtabstop=2 textwidth=90 wrapmargin=3
     augroup END
     
 
