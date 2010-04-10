@@ -45,7 +45,7 @@ endif
 let current_compiler = 'pylint'
 
 if !exists('g:pylint_onwrite')
-    let g:pylint_onwrite = 0
+    let g:pylint_onwrite = 1
 endif
 
 if !exists('g:pylint_show_rate')
