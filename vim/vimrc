@@ -163,7 +163,7 @@ if has("autocmd")
         au!
 
         """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" Python related 
-        autocmd FileType python set complete+=k/path/to/pydiction iskeyword+=.,(
+        autocmd FileType python set complete+=/home/fv/.vim/python/pydiction.py iskeyword+=.,(
         let g:pydiction_menu_height = 20
         let g:pydiction_location = '/home/fv/.vim/python/complete-dict'
         " autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -171,7 +171,7 @@ if has("autocmd")
         " autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
         autocmd FileType python im :<CR> :<CR><TAB>
         
-        " use pylint.vim plugin now autocmd FileType python compiler pylint
+        autocmd FileType python compiler pylint
         let g:pylint_onwrite = 0 
         autocmd FileType python let g:pylint_onwrite = 0
     augroup END
