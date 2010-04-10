@@ -163,7 +163,7 @@ if has("autocmd")
         au!
 
         """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" Python related 
-        autocmd FileType python set complete+=/home/fv/.vim/python/pydiction.py iskeyword+=.,(
+        autocmd FileType python set complete+=k/home/fv/.vim/python/pydiction.py iskeyword+=.,(
         let g:pydiction_menu_height = 20
         let g:pydiction_location = '/home/fv/.vim/python/complete-dict'
         " autocmd FileType python set omnifunc=pythoncomplete#Complete
