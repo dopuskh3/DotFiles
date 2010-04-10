@@ -48,9 +48,10 @@ PS1="%B%n@%m%b%~%$PR_STITLE% "
 # PS1="%B%n@%m%b(%(?:%{$fg[green]%}%?:%{$fg[red]%}%?)%{$reset_color%})~%% "
 
 #### History variables
-HISTSIZE=1000
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE="$HOME/.zsh_history"
-SAVEHIST=1000
+
 
 #### Homedir 
 #HOMEDIR=/home/fv
@@ -176,7 +177,7 @@ alias dh="dirs -v"
 alias find='noglob find'
 alias sshclean='rm ~/.ssh/known_hosts'
 alias ssh='ssh  -o "PasswordAuthentication=yes"'
-alias pmake='pmake -I ~/lib/mk/'
+alias cleancmake='rm -Rf CMakeFiles/ CMakeCache.txt'
 
 alias -s txt=$EDITOR
 alias -s pdf=xpdf
@@ -208,6 +209,11 @@ fi
 ############################### completion stuff ##################################################################
 ###################################################################################################################
 
+
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:warnings' format '%BNo candidate for: %d%b'
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 
 compctl -D -f + -H 0 '' -X '(No file found; using history)'
 compctl -o setopt
@@ -326,6 +332,10 @@ zstyle ':completion:*' verbose yes
 ############################### key bindings ######################################################################
 ###################################################################################################################
 
+bindkey -v
+
+# bindkey "\Cs" history-incremental-search-backward
+
 bindkey "\C1" beginning-of-line
 bindkey "\CH" beginning-of-line
 bindkey "" transpose-words
@@ -333,7 +343,8 @@ bindkey "" delete-char
 bindkey "\C$" end-of-line
 bindkey "\Ca" backward-delete-word
 bindkey "\Cf" backward-kill-line
-bindkey "" history-incremental-search-backward
+bindkey "\Cx" history-incremental-search-backward
+
 
 
 
@@ -349,9 +360,11 @@ setopt EXTENDED_GLOB
 setopt AUTO_PARAM_SLASH
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
-setopt EXTENDED_HISTORY
+# setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+setopt AUTO_CD
+setopt autopushd 
 
 
 # This makes the shell give immediate notice of 
@@ -395,7 +408,8 @@ done
 ###################################################################################################################
 
 if which keychain 1>/dev/null 2>&1; then
-	keychain id_rsa -q 
+    
+    keychain -q id_rsa 
 	host=`uname -n ` 
 	[ -f $HOME/.keychain/$host-sh ] && source $HOME/.keychain/$host-sh
 fi
@@ -417,35 +431,6 @@ function recomp {
 	unfunction compinit; autoload -U compinit; 
 }
 
-
-
-
-# dummy function to pack my dot-files 
-function dotspack () {
-    set -x
-	cur_date=$(date +"%k%M-%d%m-%Y")
-
-	dot_archive="dot-files-$USER-$cur_date"
-	dots_tmp=.tmp-dots-$cur_date
-	cd $HOME
-	mkdir $dots_tmp
-	for i in $DOT_LIST; do 
-        echo "Packing $i"
-		#if [ -e $i ]; then 
-		cp -fv $i $dots_tmp/
-		#fi
-	done
-	mv $dots_tmp $dot_archive
-	tar jcvf $dot_archive.tar.bz2 $dot_archive
-	rm -rf $dot_archive
-}
-
-function dotmerge () {
-    archive_file=$1
-    dots_tmp=.tmp-dotmerge
-    mkdir -p $dots_tmp
-    
-}
 
 function title {
     if [[ $TERM == "screen" ]]; then
@@ -564,23 +549,6 @@ return $RETVAL
 
 
 
-
-
-#D: thmail: Open thunderbird and write an email
-function thmail () {
-	
-	for i in $@;do 
-		if [ "x$QUERY" != "x" ]; then 
-			QUERY="$QUERY,$i"
-		else 
-			QUERY="$i"
-		fi
-	done
-	
-	thunderbird-3.0 -remote "mailto($QUERY)"
-}
-
-
 #D: myhelp: Print builtins function documentation
 function myhelp () {
     echo 
@@ -593,87 +561,6 @@ function myhelp () {
 }
 
 
-
-function apply_dots () {
-    DOTARCH=$1:t
-    DOTTMP=/tmp/dots-$USER
-    rm -rf $DO TMP
-    mkdir $DOTTMP
-    chmod 700 $DOTTMP
-    
-    if [[ "$1:e" == "gz" || "$1:e" == "tgz" ]]; then
-            gzip -d $1
-    elif [[ "$1:e" == "tbz" || "$1:e" == "bz2" || "$1:e" == "bz" ]]; then
-            bzip2 -d $1
-    else
-        return
-    fi
-
-    tar xf ${1:r:r}.tar -C $DOTTMP   
-    DOTDIR=${DOTARCH:r:r:r}
-    cd $DOTTMP/$DOTDIR
-    IFS="
-"
-
-    for i in $(grep "^~ " FILES); do
-        SRC=`echo $i | awk '{print $2}'`
-        DST=`echo $i | awk '{print $3}'`
-        echo "$SRC --> ~/$DST"
-        merge_conf $SRC $HOME/$DST
-    done
-
-    grep "^[^~]" FILES | while read i; do
-        
-        SRC=`echo $i | awk '{print $1}'`
-        DST=`echo $i | awk '{print $2}'`
-        echo "$SRC --> ~/$DST"
-        if [ -d $SRC ]; then 
-            mkdir -p $HOME/$DST
-        else
-            cp $SRC $HOME/$DST
-        fi
-    done 
-}
-
-
-function merge_conf () {
-    NEWFILE=$1
-    OLDFILE=$2
-    if [ ! -e "$2" ]; then 
-        echo "$2 does not exists, copying"
-        cp $1 $2
-        return
-    fi
-    diff -u $1 $2 1>&/dev/null
-    if [ $? -eq 0 ]; then 
-        echo "$1 and $2 are the same files."
-        return 
-    fi
-    cp $1 $2.new
-    diff -u $2 $2.new | more
-    echo "What do you want ? (Edit/Install/Skip)"
-    read RESP
-    case "$RESP" in
-        e|E|edit|Edit)
-        if which vimdiff; then 
-            vimdiff $2.new $2
-        else 
-            vi $2.new
-        fi
-        echo "Installing $2."
-        mv $2 $2.old
-        mv $2.new $2
-        ;;
-        i|I|Install|install)
-        mv $2 $2.old
-        mv $2.new $2
-        ;;
-        *)
-        return
-        ;;
-    esac
-}
-
 function tgzts () {
     for directory in $@; do
         tar zcvf $directory-$(date +"%Y%m%d").tar.gz $directory
@@ -685,35 +572,6 @@ function tbzts () {
         tar jcvf $directory-$(date +"%Y%m%d").tar.bz2 $directory
     done
 }
-
-#D: sreen-output: show screenfeeder output
-function screen-output () {
-    
-    screenfeeder_fifo=$HOME/.screenfeeder/screenfeeder.fifo
-    
-    while true ; do 
-        cat $screenfeeder_fifo
-    done
-}
-
-#D: screencat: insert some text in screenfeeder
-function screencat () {
-    screenfeeder_fifo=$HOME/.screenfeeder/screenfeeder.fifo
-    while read FOO; do 
-        echo $FOO > $screenfeeder_fifo
-    done
-}    
-
-
-#D: fetchmergemaster: fetch FreeBSD mergemaster tarball 
-function fetchmergemaster () {
-    mergemasterpath="http://grappa.unix-ag.uni-kl.de/~naddy/mergemaster-1.46.tar.gz"
-
-    wget $mergemasterpath
-
-
-}
-
 
 #D: svnkwset: set basic svn keywords on a file
 function svnkwset () {

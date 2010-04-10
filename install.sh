@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -x 
 
 
@@ -13,3 +14,4 @@ installlink zsh/zshrc .zshrc
 installlink screen/screenrc .screenrc
 installlink vim/vim .vim
 installlink vim/vimrc .vimrc
+installlink pylint/pylintrc .pylintrc
