@@ -104,6 +104,14 @@ if [ -d ~/bin ]; then
 fi
 export PATH
 
+# python
+
+if [ -e ~/.pythonrc ]; then 
+  echo -n "Setting up python startup file..."
+  export PYTHONSTARTUP=~/.pythonrc
+  echo "Done"
+fi
+
 
 ##### Some other dummy variables 
 

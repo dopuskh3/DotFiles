@@ -52,9 +52,9 @@ set statusline=%58(%-15t\ \ %Y%M\ \ #%2n\ \ %3v,%-3l\ of\ %L\ \ %5P%)
 set laststatus=2            
 set shell=zsh               " my shell 
 set ttyfast                 " i'm fast
-set tabstop=4                    
-set shiftwidth=4                   " shift width 
-set softtabstop=4           " soft tabs
+set tabstop=2
+set shiftwidth=2                   " shift width 
+set softtabstop=2           " soft tabs
 set scrolloff=8             " scroll buffer 8 line before/after
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set wrap                    " wrap long lines
@@ -125,6 +125,8 @@ map ;f :fold<cr>
 map ;c :e ~/.vimrc<CR>
 map ;s :sh<CR>
 map ;h :call MyPersonalHelp()<CR>
+map ;z :cp<CR>
+map ;x :cn<CR>
 map <F11> :call Insert_datetime()<CR>
 map ;fl :TMiniBufExplorer<CR>
 
@@ -223,7 +225,8 @@ runtime ftplugin/man.vim
 
 
 if has("gui_running")
-    colo ironman
+    " colo ironman
+    colo fnaqevan
     set guioptions+=m
     " metacosm
 endif
