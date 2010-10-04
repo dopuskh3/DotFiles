@@ -44,7 +44,8 @@
 ###################################################################################################################
 
 #### Shell prompt 
-PS1="%B%n@%m%b%~%$PR_STITLE% "
+# PROMPT='%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $(git_prompt_info)%(!.#.>)'
+PS1='%{$fg[green]%}%B%n%b%{$reset_color%}@%{$fg[blue]%}%B%m%b%{$reset_color%}:%{$fg[red]%}%B%c/%{$reset_color%}%(!.#.%%)%b '
 # PS1="%B%n@%m%b(%(?:%{$fg[green]%}%?:%{$fg[red]%}%?)%{$reset_color%})~%% "
 
 #### History variables
@@ -373,6 +374,7 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt AUTO_CD
 setopt autopushd 
+setopt prompt_subst
 
 
 # This makes the shell give immediate notice of 
@@ -555,6 +557,18 @@ function pkil () {
 return $RETVAL
 }
 
+#D: grev pattern and edit files that match with vim 
+function vigrep () {
+   
+  command=$(egrep -I $* | awk -F: '{print "vim "$1" +"$2";"}') 
+  tmpfile=$(mktemp)
+  echo $command > $tmpfile
+  echo $command
+  echo "You will edit those files: "
+  read 
+  sh $tmpfile
+
+}
 
 
 #D: myhelp: Print builtins function documentation
