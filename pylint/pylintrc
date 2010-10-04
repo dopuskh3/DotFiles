@@ -47,13 +47,14 @@ cache-size=500
 #enable-msg-cat=
 
 # Disable all messages in the listed categories.
-#disable-msg-cat=
+# disable-msg-cat=C
 
 # Enable the message(s) with the given id(s).
 #enable-msg=
 
 # Disable the message(s) with the given id(s).
-disable-msg=C0103,C0111,C0323,R0902,W0702
+disable-msg=C0112,R0201
+#C0103,C0111,C0323,R0902,W0702
 
 
 [REPORTS]
@@ -101,7 +102,7 @@ ignore-mixin-members=yes
 
 # List of classes names for which member attributes should not be checked
 # (useful for classes with attributes dynamicaly set).
-ignored-classes=SQLObject
+ignored-classes=SQLObject, ScopedSession, ReferenceImage, ReferenceImageProvider
 
 # When zope mode is activated, add a predefined set of Zope acquired attributes
 # to generated-members.
@@ -148,31 +149,31 @@ required-attributes=
 
 # Regular expression which should only match functions or classes name which do
 # not require a docstring
-no-docstring-rgx=__.*__
+no-docstring-rgx=__.*__|__.*
 
 # Regular expression which should only match correct module names
 module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
 
 # Regular expression which should only match correct module level names
-const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+const-rgx=(([A-Za-z_][A-Za-z0-9_]*)|(__.*__))$
 
 # Regular expression which should only match correct class names
-class-rgx=[A-Z_][a-zA-Z0-9]+$
+class-rgx=LTU[A-Z_][a-zA-Z0-9]+$
 
 # Regular expression which should only match correct function names
-function-rgx=[a-z_][a-z0-9_]{2,30}$
+function-rgx=[a-z]{2,10}[A-Z0-9a-z]{2,30}$
 
 # Regular expression which should only match correct method names
-method-rgx=[a-z_][a-z0-9_]{2,30}$
+method-rgx=(__[a-zA-Z0-9_]{1,50}__)|_{0,2}[a-z_]{2,10}[A-Za-z0-9]{2,30}$
 
 # Regular expression which should only match correct instance attribute names
-attr-rgx=[a-z_][a-z0-9_]{2,30}$
+attr-rgx=_{0,2}[losbfdit][A-Z]{1,}[A-Za-z0-9]{1,30}$
 
 # Regular expression which should only match correct argument names
-argument-rgx=[a-z_][a-z0-9_]{2,30}$
+argument-rgx=self|p[losbfdit]{1}[A-Z]{1,10}[A-Za-z0-9]{2,30}$
 
 # Regular expression which should only match correct variable names
-variable-rgx=[a-z_][a-z0-9_]{2,30}$
+variable-rgx=self|[lp_][losbfdit]{1}[A-Z]{1,10}[A-Za-z0-9]{2,30}$
 
 # Regular expression which should only match correct list comprehension /
 # generator expression variable names
