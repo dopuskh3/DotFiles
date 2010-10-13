@@ -222,7 +222,7 @@ runtime ftplugin/man.vim
 " -------------------------------------------------------------------------
 "
 "
-
+set bg=dark
 
 if has("gui_running")
     " colo ironman
