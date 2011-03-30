@@ -49,9 +49,15 @@ PS1='%{$fg[green]%}%B%n%b%{$reset_color%}@%{$fg[blue]%}%B%m%b%{$reset_color%}:%{
 # PS1="%B%n@%m%b(%(?:%{$fg[green]%}%?:%{$fg[red]%}%?)%{$reset_color%})~%% "
 
 #### History variables
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=200000
+SAVEHIST=200000
 HISTFILE="$HOME/.zsh_history"
+
+
+autoload -U colors 
+colors
+autoload -U compinit
+compinit
 
 
 #### Homedir 
@@ -60,10 +66,28 @@ HISTFILE="$HOME/.zsh_history"
 #### Dot file to backup 
 # DOT_LIST=.zshrc .screenrc .gconf .vim .vimrc .fvwm* .screenrc .vimrc .ssh/id_rsa.pub
 #MERGABLE_DOT_FILES=".zshrc .fluxbox/startup .vimrc"
+#
+function mylog() {
+  echo "$bg[grey]$fg[red]"$*"$reset_color"
+}
 
+function logscreens {
+  sessions=`screen -ls | perl -ne 'print " * $1\n" if /^\s+(.+?)\s+\((.+?)\).+$/'`
+  if [ "$sessions" != "" ]; then
+    echo -n "$fg[green]"
+    echo "Available screen sessions:    "
+    echo "$sessions"
+    echo -n "$reset_color"
+  fi
+}
+
+function swhich(){
+  which $* > /dev/null
+  return $?
+}
 
 #### favorite editor 
-if which vim; then 
+if swhich vim; then 
 	EDITOR=vim 
 else 
 	EDITOR=vi
@@ -71,36 +95,34 @@ fi
 
 #### favorite browser 
 
-if which w3m; then 
+if swhich w3m; then 
 	TEXTBROWSER=w3m
-elif which elinks ; then 
+elif swhich elinks ; then 
 	TEXTBROWSER=elinks
-elif which links ; then 
+elif swhich links; then 
 	TXTBROWSER=links
-elif which lynx ; then 
+elif swhich lynx; then 
 	TEXTBROWSER=lynx
 fi
 
-if which firefox; then 
+if swhich firefox; then 
 	XBROWSER='firefox'
-elif which mozilla; then 
+elif swhich mozilla; then 
 	XOPENURL='mozilla'
 fi
 
 			
-if which thunderbird;then
+if swhich thunderbird;then
     XMAIL='thunderbird'
-elif which 'mozilla-thunderbird'; then 
+elif swhich 'mozilla-thunderbird'; then 
     XMAIL='mozilla-thunderbird'
 fi
 
-
-
 #### pager and manpager ( replaced with man function and myless function )
-
 
 # path
 if [ -d ~/bin ]; then 
+  mylog -n "Optional bin path in ~/bin."
 	PATH=$PATH:~/bin
 fi
 export PATH
@@ -108,20 +130,18 @@ export PATH
 # python
 
 if [ -e ~/.pythonrc ]; then 
-  echo -n "Setting up python startup file..."
+  mylog "Setting up python startup file..."
   export PYTHONSTARTUP=~/.pythonrc
-  echo "Done"
 fi
 
 
 ##### Some other dummy variables 
 
-
 	####################
 	##### linux ########
 	####################
 if [ `uname` = Linux ]; then
-    if which vim; then 
+    if swhich vim; then 
 		PAGER="less" 
         #"vim --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' "$@""
 		# MANPAGER="col -b | vim  -c 'set ft=man nomod nolist' -"
@@ -150,12 +170,8 @@ if [ `uname` = OpenBSD ]; then
             
 fi
 
-
-
 export PS1 PAGER EDITOR SAVEHIST HISTFILE HISTSIZE MANPAGER
 export LSCOLORS='cxgxhxhxbxhxhxbabacaca'
-
-
 
 ###################################################################################################################
 #################################  system settings ################################################################
@@ -163,9 +179,6 @@ export LSCOLORS='cxgxhxhxbxhxhxbabacaca'
 
 # No messy core dumps!
 ulimit -c 0
-# Set up the file creation mask
-# umask 022
-
 
 
 ###################################################################################################################
@@ -175,7 +188,7 @@ ulimit -c 0
 
 alias ls='/bin/ls -Ft $LS_OPT2'
 
-if which vim; then 
+if swhich vim; then 
 	alias less='myless'
 else
 	alias less='less -X -M'
@@ -201,6 +214,7 @@ alias -s h=vim
 alias "o"="xdg-open"
 
 hosts=("${(s: :)${(s:   :)${${(f)$(</etc/hosts)}%%\#*}#*[       ]*}}")
+
 groups=( "${${(f)$(</etc/group)}%%:*}" )
 
 
@@ -212,12 +226,9 @@ if [ `uname` = FreeBSD ]; then
 fi
 
 
-
-
 ###################################################################################################################
 ############################### completion stuff ##################################################################
 ###################################################################################################################
-
 
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BNo candidate for: %d%b'
@@ -292,7 +303,6 @@ fi
 
 
 # These should be available on most Unix systems.
-
 compctl -g "*.tif *.tiff *.GIF *.JPG *.gif *.jpg *.bmp *.xpm *.xbm\
 		*.pcx *.pgm *.ppm *.pnm *.png" + -g "*(-/) .*(-/)" xv
 compctl -g "*.pdf *.PDF" + -g "*(-/) .*(-/)" xpdf gpdf 
@@ -305,15 +315,13 @@ compctl -g "*.gz" + -g "*(-/) .*(-/)" gunzip
 compctl -g "*.gz *.Z *.zip" + -g "*(-/) .*(-/)" zless zgrep zcat
 compctl -g "*.zip" + -g "*(-/) .*(-/)" unzip
 compctl -g "*.Z" + -g "*(-/) .*(-/)" uncompress
-compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz" \
-		+ -g "*(-/) .*(-/)" tar
+compctl -g "*.tar *.tgz *.tz *.tar.Z *.tar.bz2 *.tZ *.tar.gz" + -g "*(-/) .*(-/)" tar
 compctl -g "*.a *.deb" + -g "*(-/) .*(-/)" ar
-compctl -g "*.tex" + -g "*(-/) .*(-/)"\
-		tex latex pdftex pdflatex bibtex latex2html
+compctl -g "*.tex" + -g "*(-/) .*(-/)" tex latex pdftex pdflatex bibtex latex2html
 compctl -g "*.dvi" + -g "*(-/) .*(-/)" xdvi dvips
 # Look for html files, then directories, then history
-compctl -g "*.html *.htm" + -g "*(-/) .*(-/)" + -H 0 ''\
-		netscape lynx wget opera
+compctl -g "*.html *.htm" + -g "*(-/) .*(-/)" + -H 0 '' chromium-browser links w3m firefox mozilla-firefox
+
 # You would never want telnet to cycle through files, 
 # this cycles through the history instead. Likewise 
 # with ftp, ssh etc.
@@ -353,6 +361,7 @@ bindkey "\C$" end-of-line
 bindkey "\Ca" backward-delete-word
 bindkey "\Cf" backward-kill-line
 bindkey "\Cx" history-incremental-search-backward
+bindkey "\Cz" history-beginning-search-backward
 
 
 
@@ -394,19 +403,13 @@ setopt pushdtohome
 zstyle ':completion:*' completer _expand _complete
 zstyle :compinstall filename $HOME'/.zshrc'
 
-autoload -U colors 
-colors
-autoload -U compinit
-compinit
-
-
 ###################################################################################################################
 ############################### other zsh local settings install ##################################################
 ###################################################################################################################
 
 for i in $HOME/.zshrc_local $HOME/.zlocal; do
 if [ -e $i ]; then 
-	echo "Sourcing $i" 
+	mylog "Sourcing $i" 
 	source $i
 fi 
 done
@@ -417,13 +420,14 @@ done
 ############################### shell-statup-commands #############################################################
 ###################################################################################################################
 
-if which keychain 1>/dev/null 2>&1; then
-    
-    keychain -q id_rsa 
+if swhich keychain; then
+  mylog "Adding keychain..."
+  keychain -q id_rsa 
 	host=`uname -n ` 
 	[ -f $HOME/.keychain/$host-sh ] && source $HOME/.keychain/$host-sh
 fi
 
+logscreens
 
 ###################################################################################################################
 ##############################  some functions ####################################################################
@@ -581,7 +585,6 @@ function myhelp () {
     
     echo $HELP
 }
-
 
 function tgzts () {
     for directory in $@; do
