@@ -9,6 +9,7 @@ function installlink(){
 }
 
 installlink zsh/zshrc .zshrc
+installlink zsh/zsh   .zsh
 installlink screen/screenrc .screenrc
 installlink vim/vim .vim
 installlink vim/vimrc .vimrc
