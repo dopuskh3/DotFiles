@@ -14,6 +14,8 @@ if swhich keychain; then
 	[ -f $HOME/.keychain/$host-sh ] && source $HOME/.keychain/$host-sh
 fi
 
-logscreens
+if [ "$TERM" != "screen" ]; then
+  logscreens
+fi
 
 
