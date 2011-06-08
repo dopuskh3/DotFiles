@@ -24,7 +24,11 @@ utf8 on on
 # vbell_msg               "%C -> %n%f %t activity!"
 
 
+
+
 backtick 42 0 0 "/home/fv/pyscreenfeeder.py" "/home/fv/feeds"
+backtick 41 0 0 "tail" "-f" "/home/fvisconte/.screenpipe"
+backtick 10 30 30 "screen -ls | grep $PPID | awk '{print $1}' | perl -pe 's/\d+\.(.+)/$1/'"
 
 
 # ======================================================
@@ -36,8 +40,8 @@ bind ~ activity       "activity in %n (%t) [%w:%s]~"
 bind * activity       "activity in %n (%t) [%w:%s]"
 bind m screen -t 'mutt'    1 mutt
 bind v screen -t 'vim'     4 vim
-bind ^e screen -t '@vmax' 5 ssh -o "PasswordAuthentication=yes" fv@vmax
-bind ^s screen -t '@sapin' 10 ssh sapin
+# bind ^e screen -t '@vmax' 5 ssh -o "PasswordAuthentication=yes" fv@vmax
+# bind ^s screen -t '@sapin' 10 ssh sapin
 bind = resize +3
 bind ) resize -3
 
@@ -152,7 +156,7 @@ hardstatus on
 #hardstatus alwayslastline "%{+b kr}host: %{kw}%H %{kg} | %c | %{ky}%d.%m.%Y | %{kr}(load: %l)%-0=%{kw}" 
 # hardstatus alwayslastline "%{+b .r}host: %{.w}%H %{.g} | %c | %{.y}%d.%m.%Y | %{.g} %42`20 | %{.r}(load: %l)%-0=%{.w}" 
 # hardstatus alwayslastline " [ %42` ] "
-hardstatus alwayslastline "%{+b kw}%H%{kg}|%c|%42`|%{ky}%d.%m.%Y|%{kr}(load:%l)%-0=%{kw}"
+hardstatus alwayslastline "%{+b kw}%H|%{b}|%{kg}|%c|%{ky}%d.%m.%Y|%{kr}(load:%l)%-0=%{kw}"
 # hardstatus alwayslastline "%42`"
 bind f screen -t 'rss_feed' 10 /home/fv/pyscreenfeeder.py
 # 0 Black             .    leave color unchanged

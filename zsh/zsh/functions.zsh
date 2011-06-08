@@ -2,6 +2,7 @@ function mylog() {
   echo "$bg[grey]$fg[red]"$*"$reset_color"
 }
 
+# D: log screen sessions
 function logscreens {
   sessions=`screen -ls | perl -ne 'print " * $1\n" if /^\s+(.+?)\s+\((.+?)\).+$/'`
   if [ "$sessions" != "" ]; then
@@ -90,7 +91,7 @@ function google () {
 	if [[ "x$DISPLAY" == "x" ]]; then 
 		$TEXTBROWSER "http://www.google.com/search?q=$QUERY"
 	else 
-		$XBROWSER -remote "openurl(http://www.google.com/search?q=$QUERY)"
+		x-www-browser "http://www.google.com/search?q=$QUERY"
 	fi
 }
 
@@ -115,10 +116,8 @@ function archinfo () {
 
 #D: kil: kil a program trying multiple signals
 function kil () {
-
     PID=$1
-        RETVAL=0
-
+    RETVAL=0
     for signal in "TERM" "INT" "HUP" "KILL"; do
          kill -$signal $PID
           RETVAL=$?
@@ -146,7 +145,7 @@ function pkil () {
 return $RETVAL
 }
 
-#D: grev pattern and edit files that match with vim 
+#D: grep pattern and edit files that match with vim 
 function vigrep () {
    
   command=$(egrep -I $* | awk -F: '{print "vim "$1" +"$2";"}') 
@@ -189,6 +188,7 @@ function svnkwset () {
     echo "Setting the following keywords on $@: $kw"
     svn propset svn:keywords $kw $@
 }
+
 
 HELP="
     fv\'s zsh documentation 
