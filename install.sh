@@ -15,3 +15,4 @@ installlink vim/vim .vim
 installlink vim/vimrc .vimrc
 installlink pylint/pylintrc .pylintrc
 installlink python/pythonrc .pythonrc
+installlink awesome .config/awesome
