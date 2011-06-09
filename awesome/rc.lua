@@ -300,8 +300,8 @@ end
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
+    awful.button({ "Mod1" }, 1, awful.mouse.client.move),
+    awful.button({ "Mod1" }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)

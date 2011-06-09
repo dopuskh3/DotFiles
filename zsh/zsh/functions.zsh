@@ -189,6 +189,34 @@ function svnkwset () {
     svn propset svn:keywords $kw $@
 }
 
+function dot-reinstall (){
+  cd ~/DotFiles
+  ./install.sh
+  cd -
+}
+
+function dot-pull () {
+  cd ~/DotFiles
+  git pull
+  cd -
+}
+
+function dot-status () {
+  cd ~/DotFiles
+  git status
+  cd -
+}
+
+function dot-push () {
+  cd ~/DotFiles
+  git push origin master
+  cd -
+}
+
+function dot-update () {
+  dot-pull
+  dot-reinstall
+}
 
 HELP="
     fv\'s zsh documentation 
