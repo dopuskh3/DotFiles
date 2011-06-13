@@ -213,6 +213,7 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "c", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control"   }, "q", awesome.quit),
 
@@ -239,7 +240,36 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+	awful.key({ "Mod1"   }, "Left",
+	    function (c)
+		local curidx = awful.tag.getidx(c:tags()[1])
+		if curidx == 1 then
+		    c:tags({screen[mouse.screen]:tags()[9]})
+		else
+		    c:tags({screen[mouse.screen]:tags()[curidx - 1]})
+		end
+	    end),
+	awful.key({ "Mod1"  }, "Right",
+	  function (c)
+		local curidx = awful.tag.getidx(c:tags()[1])
+		if curidx == 9 then
+		    c:tags({screen[mouse.screen]:tags()[1]})
+		else
+		    c:tags({screen[mouse.screen]:tags()[curidx + 1]})
+		end
+	    end), 
+
+
+  awful.key({ "Mod1" }, "s", 
+    function(c)
+      local newscreen = mouse.screen + 1
+      if newscreen > screen.count() then
+        newscreen = 1
+      end 
+      mouse.screen = newscreen
+    end)
+
 )
 
 clientkeys = awful.util.table.join(
@@ -300,8 +330,8 @@ end
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ "Mod1" }, 1, awful.mouse.client.move),
-    awful.button({ "Mod1" }, 3, awful.mouse.client.resize))
+    awful.button({ "Control" }, 1, awful.mouse.client.move),
+    awful.button({ "Control" }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)
@@ -357,4 +387,7 @@ end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+
+
 -- }}}
