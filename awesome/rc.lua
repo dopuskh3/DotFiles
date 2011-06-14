@@ -22,6 +22,9 @@ mail = "thunderbird"
 
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
+playernext = "rhythmbox-client --next"
+playerprev = "rhythmbox-client --previous"
+playerpause = "rhythmbox-client --play-pause"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -51,6 +54,16 @@ layouts =
     awful.layout.suit.magnifier
 }
 -- }}}
+
+local function mouse_move(x_co,y_co)
+  mouse.coords({ x=x_co, y=y_co })
+end
+
+function dbg(vars)
+  local text = ""
+  for i=1, #vars do text = text .. vars[i] .. " | " end
+  naughty.notify({ text = text, timeout = 0 })
+end
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
@@ -213,6 +226,9 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ "Control", modkey, "Mod1" }, "Right", function() awful.util.spawn(playernext) end),
+    awful.key({ "Control", modkey, "Mod1" }, "Left", function() awful.util.spawn(playernext) end),
+    awful.key({ "Control", modkey, "Mod1" }, "space", function() awful.util.spawn(playerpause) end),
     awful.key({ modkey,           }, "c", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control"   }, "q", awesome.quit),
@@ -268,6 +284,10 @@ globalkeys = awful.util.table.join(
         newscreen = 1
       end 
       mouse.screen = newscreen
+      local xm = mouse.screen.geometry.width/2.0
+      local ym = mouse.screen.geometry.height/2.0
+      mouse_move(xm, ym)
+      
     end)
 
 )

@@ -1,6 +1,6 @@
-gnome-setting-daemon&
 nm-applet&
-empathy &
+empathy -h &
 gnome-power-manager &
 gnome-volume-control-applet &
+gnome-setting-daemon&
 exec awesome
