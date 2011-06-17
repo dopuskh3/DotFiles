@@ -283,10 +283,10 @@ globalkeys = awful.util.table.join(
       if newscreen > screen.count() then
         newscreen = 1
       end 
+      mouse_move(200, 200)
       mouse.screen = newscreen
-      local xm = mouse.screen.geometry.width/2.0
-      local ym = mouse.screen.geometry.height/2.0
-      mouse_move(xm, ym)
+      -- local xm = mouse.screen.geometry.width/2.0
+      -- local ym = mouse.screen.geometry.height/2.0
       
     end)
 
