@@ -18,3 +18,4 @@ installlink python/pythonrc .pythonrc
 installlink awesome .config/awesome
 installlink X/Xsession .Xsession
 installlink X/Xsession .xinitrc
+installlink bash/bashrc .bashrc
