@@ -14,6 +14,7 @@ alias sshclean='rm ~/.ssh/known_hosts'
 alias ssh='ssh  -o "PasswordAuthentication=yes"'
 alias cleancmake='rm -Rf CMakeFiles/ CMakeCache.txt'
 alias grep='grep --color'
+alias egrep='egrep --color'
 
 alias -s txt=$EDITOR
 alias -s pdf=xpdf
