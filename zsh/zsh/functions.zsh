@@ -2,7 +2,7 @@ function mylog() {
   echo "$bg[grey]$fg[red]"$*"$reset_color"
 }
 
-# D: log screen sessions
+#D: logscreens: log screen sessions
 function logscreens {
   sessions=`screen -ls | perl -ne 'print " * $1\n" if /^\s+(.+?)\s+\((.+?)\).+$/'`
   if [ "$sessions" != "" ]; then
@@ -71,10 +71,10 @@ function myless () {
 	
 }
 
-#function man () {
-#      command man $* | col -b | vim -c 'set ft=man' -c 'set nomod' -
-#
-#}
+function man () {
+      command man $* | col -b | vim -c 'set ft=man' -c 'set nomod' -
+
+}
 
 # dummy function to make a web search 
 #D: google: search google for a word
@@ -95,8 +95,8 @@ function google () {
 	fi
 }
 
-#D: archinfo: try to extract an arbitrary function
-function archinfo () {
+#D: archextract: try to extract an archive
+function archextract () {
 	if [[ "$1:e" == "gz" || "$1:e" == "tgz" ]]; then 
 		tararg="z"
 	elif [[ "$1:e" == "tbz" || "$1:e" == "bz2" || "$1:e" == "bz" ]]; then 
@@ -145,7 +145,7 @@ function pkil () {
 return $RETVAL
 }
 
-#D: grep pattern and edit files that match with vim 
+#D: vigrep: grep pattern and edit files that match with vim 
 function vigrep () {
    
   command=$(egrep -I $* | awk -F: '{print "vim "$1" +"$2";"}') 
@@ -164,7 +164,7 @@ function myhelp () {
     echo 
     echo "Personal builtin commands from zshrc: "
     echo 
-    grep "^#D: " $HOME/.zshrc | awk -F"#D: " '{print "\t"$2""}' | sed 's/: /:\t/g'
+    grep "^#D: " $HOME/.zshrc $HOME/.zsh/* | awk -F"#D: " '{print "\t"$2""}' | sed 's/: /:\t/g'
     echo ""
     
     echo $HELP
@@ -189,33 +189,71 @@ function svnkwset () {
     svn propset svn:keywords $kw $@
 }
 
+#D: dot-reinstall: Re-install dot files
 function dot-reinstall (){
   cd ~/DotFiles
   ./install.sh
   cd -
 }
 
+#D: dot-pull: Pull dot files
 function dot-pull () {
   cd ~/DotFiles
   git pull
   cd -
 }
 
+#D: dot-status: Print status 
 function dot-status () {
   cd ~/DotFiles
   git status
   cd -
 }
 
+#D: dot-push: Push dot files to master
 function dot-push () {
   cd ~/DotFiles
   git push origin master
   cd -
 }
 
+#D: dot-update: Pull and re-install dot files
 function dot-update () {
   dot-pull
   dot-reinstall
+}
+
+#D: tmux-list: Lists tmux session
+function tmux-list () { 
+  tmux list-sessions 
+}
+
+#D: tmux-attach <session>: Attach a session
+function tmux-attach () {
+  session=$1
+  tmux attach-session -t $1
+}
+
+#D: tmux-share <session>: Attach to an existing sesion without detaching
+function tmux-share () { 
+  session=$1
+  tmux new-session -t $1
+}
+
+#D: tmux-new <session>: Create new tmux session
+function tmux-new () { 
+  session=$1
+  tmux new-session -s $1
+}
+
+#D: tmux-session <session>: Create OR share a tmux session
+function tmux-session () { 
+  session=$1
+  if tmux has-session -t $1; then
+    tmux-share $1
+  else
+    tmux-new $1
+  fi
 }
 
 HELP="

@@ -18,11 +18,11 @@ alias egrep='egrep --color'
 
 alias -s txt=$EDITOR
 alias -s pdf=xpdf
-alias -s gz=archinfo
-alias -s bz2=archinfo
-alias -s tbz=archinfo
-alias -s tgz=archinfo
-alias -s bz=archinfo
+alias -s gz=archextract
+alias -s bz2=archextract
+alias -s tbz=archextract
+alias -s tgz=archextract
+alias -s bz=archextract
 alias -s vim=vim
 alias -s c=vim
 alias -s h=vim
