@@ -19,3 +19,4 @@ installlink awesome .config/awesome
 installlink X/Xsession .Xsession
 installlink X/Xsession .xinitrc
 installlink bash/bashrc .bashrc
+installlink tmux/tmux.conf .tmux.conf
