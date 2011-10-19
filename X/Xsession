@@ -1,6 +1,2 @@
-nm-applet&
-empathy -h &
-gnome-power-manager &
-gnome-volume-control-applet &
-gnome-setting-daemon&
+exec gnome-session &
 exec awesome
