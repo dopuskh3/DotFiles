@@ -4,10 +4,16 @@ function mylog() {
 
 #D: logscreens: log screen sessions
 function logscreens {
-  sessions=`screen -ls | perl -ne 'print " * $1\n" if /^\s+(.+?)\s+\((.+?)\).+$/'`
+  if ps aux | grep tmux >/dev/null; then
+    sessions=`tmux ls | cut -d: -f1 | sed 's/^/  * /g'`
+    session_mgr="tmux"
+  else
+    sessions=`screen -ls | perl -ne 'print " * $1\n" if /^\s+(.+?)\s+\((.+?)\).+$/'`
+    session_mgr="screen"
+  fi
   if [ "$sessions" != "" ]; then
     echo -n "$fg[green]"
-    echo "Available screen sessions:    "
+    echo "Available $session_mgr sessions:    "
     echo "$sessions"
     echo -n "$reset_color"
   fi
