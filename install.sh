@@ -32,6 +32,7 @@ installlink fonts/ .fonts
 installlink terminator/config .config/terminator/config
 
 for install_file in */install.sh; do
+  chmod +x $install_file
   if [ -x $install_file ]; then
     echo "Running $install_file."
     source $install_file
