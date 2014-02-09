@@ -1,0 +1,21 @@
+#compdef gerrit
+
+
+
+_arguments -C \
+  '1:cmd:->cmds' \
+  '*::arg:->args' \
+  && ret=0
+
+
+
+case "$state" in 
+  (cmds)
+    local commands
+    commands=(
+      'review:Make operations on reviews'
+      'approve:Approve a review')
+
+    _describe -t commands 'command' commands && ret=1
+  ;;
+esac

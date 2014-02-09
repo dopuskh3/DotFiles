@@ -7,7 +7,10 @@ hosts=("${(s: :)${(s:   :)${${(f)$(</etc/hosts)}%%\#*}#*[       ]*}}")
 
 groups=( "${${(f)$(</etc/group)}%%:*}" )
 
+fpath=($fpath ~/.zsh/completion)
 
+autoload -U compinit
+compinit
 
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BNo candidate for: %d%b'
@@ -36,13 +39,6 @@ zstyle :compinstall filename $HOME'/.zshrc'
 zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
 zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
 
-#function _cr_commands(){
-#  echo $*
-#  cr_commands=(`cd ~/Sources; cr help | grep '*' | awk '{print $2}'`)
-#}
-
-#compdef _cr_commands cr
-
 # pip zsh completion start
 function _pip_completion {
   local words cword
@@ -52,6 +48,15 @@ function _pip_completion {
              COMP_CWORD=$(( cword-1 )) \
              PIP_AUTO_COMPLETE=1 $words[1] ) )
 }
+
 compctl -K _pip_completion pip
-# pip zsh completion end
+
+
+function _ninja() {
+  reply=(`(ninja -t targets all 2&>/dev/null) | awk -F: '{print $1}'`)
+}
+
+compctl -K _ninja ninja
+
+
 

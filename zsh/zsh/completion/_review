@@ -1,0 +1,8 @@
+#compdef review
+#
+#
+local args
+args=("${(@f)$(git log --format="%h:%s" gerrit/master..HEAD)}")
+_arguments -C '*:command:->command'
+_describe -t commits 'commit' args
+return 0

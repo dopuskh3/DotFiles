@@ -1,0 +1,6 @@
+#compdef cdb
+local args
+args=("${(@f)$(cat /home/fvisconte/.zsh/cdbookmarks|awk '{print $1":"$2}')}")
+_arguments -C '1:command:->command'
+_describe -t paths 'paths' args
+return 0
