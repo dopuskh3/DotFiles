@@ -1,9 +1,3 @@
 
+source ~/.zsh/bootstrap.zsh
 
-source ~/.zsh/functions.zsh 
-source ~/.zsh/options.zsh
-source ~/.zsh/aliases.zsh
-source ~/.zsh/bindings.zsh
-source ~/.zsh/completion.zsh
-source ~/.zsh/init.zsh
-source ~/.zsh/vcs_info.zsh
