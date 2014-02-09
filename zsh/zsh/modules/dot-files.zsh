@@ -6,7 +6,7 @@
 
 DOTFILE_PATH=$HOME/DotFiles
 DOTFILE_REMOTE=git@github.com:dopuskh3/DotFiles
-DOTFILE_REMOTE_BRANCH=origin
+DOTFILE_REMOTE_BRANCH=master
 
 
 function dot-setup () {
