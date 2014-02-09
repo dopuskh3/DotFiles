@@ -2,24 +2,25 @@
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
+require("awful.util")
 -- Theme handling library
 require("beautiful")
 -- Notification library
 require("naughty")
-
 -- Load Debian menu entries
 require("debian.menu")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/fvisconte/.config/awesome/theme.lua")
--- /usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
 browser = "x-www-browser"
 filebrowser = "nautilus"
 mail = "thunderbird"
+soundpreferences = "gnome-control-center sound"
+-- joinsession = "bash -c \"foo=`zenity --entry --text \\\"Session ?\\\"`; x-terminal-emulator -e \\\"tmux new -t $foo || tmux new -s $foo\\\"\""
 
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
@@ -41,13 +42,13 @@ desktopkey = { "Alt", "Control" }
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
+    awful.layout.suit.floating,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max,
@@ -209,7 +210,6 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -230,6 +230,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", modkey, "Mod1" }, "Right", function() awful.util.spawn(playernext) end),
     awful.key({ "Control", modkey, "Mod1" }, "Left", function() awful.util.spawn(playernext) end),
     awful.key({ "Control", modkey, "Mod1" }, "space", function() awful.util.spawn(playerpause) end),
+    -- awful.key({ modkey,           }, "s", function () awful.util.spawn(joinsession) end),
     awful.key({ modkey,           }, "c", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control"   }, "q", awesome.quit),
@@ -373,6 +374,11 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+
+    -- { rule = { class = "Eclipse"},
+    --  properties = { tag = tags[1][4] }},
+    -- { rule = { class = "X-www-browser" },
+    --  properties = { tag = tags[2][1] }},
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -409,6 +415,13 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
+
+awful.util.spawn_with_shell("gnome-settings-daemon")
+awful.util.spawn_with_shell("nm-applet")
+awful.util.spawn_with_shell("gnome-sound-applet")
+awful.util.spawn_with_shell("pidgin")
+-- awful.util.spawn_with_shell("autocutsel")
+-- awful.util.spawn_with_shell("autocutsel -s PRIMARY")
 
 
 -- }}}
