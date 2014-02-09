@@ -1,12 +1,8 @@
 
 source ~/.mutt/account
-# locales FR pour les nom des jours et mois
-#
-set locale="fr_FR"
-# Format de date
+set locale="en_US"
 set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
-# phrase d'intro pour réponse quotée
-set attribution="Le %d, %n a écrit :"
+set attribution="%d, %n"
 set forward_format="[Fwd: %s]"
 set forward_quote
 
