@@ -1,2 +1,8 @@
-import readline, rlcompleter
-readline.parse_and_bind("tab: complete")
+
+try:
+  import readline, rlcompleter
+except ImportError:
+  pass
+else:
+  readline.parse_and_bind("tab: complete")
+
