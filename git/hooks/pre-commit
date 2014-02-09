@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+# 
+# This git hook forbid commit on configured branches.
+# 
+
+import sys
+import os
+import subprocess
+
+
+GIT_BRANCH_COMMAND="git rev-parse --abbrev-ref HEAD"
+
+FORBIDDEN_BRANCHES = []
+
+
+def run(psCommand):
+    return subprocess.check_output(psCommand, shell=True).strip('\n')
+
+def getGitBranch():
+  return run(GIT_BRANCH_COMMAND)
+
+if getGitBranch() in FORBIDDEN_BRANCHES:
+  print >>sys.stderr, "You cannot commit on the following branches: %s" % ', '.join(FORBIDDEN_BRANCHES)
+  print >>sys.stderr, "Use --no-verify commit option to skip this check"
+  sys.exit(1)
+

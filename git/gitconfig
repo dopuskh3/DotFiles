@@ -1,0 +1,57 @@
+[user]
+  name = Francois Visconte
+  email = f.visconte@gmail.com
+  signingkey = Francois VISCONTE <fvisconte@gmail.com>
+
+[color]
+  ui = true
+
+[alias]
+  review = push gerrit HEAD:refs/publish/master
+  draftreview = push gerrit HEAD:refs/drafts/master
+  ps = push
+  p = pull
+  c = commit 
+  r = rebase
+  cp = cherry-pick
+  s = stash
+  b = branch 
+  d = diff --color --color-words --abbrev
+  st = status -sb
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' 
+  a = config --get-regexp alias.*
+  # list reviews on gerrit
+  lsr = !"for x in `git branch | sed 's/*//'`; do  l=`git log --pretty=oneline --abbrev-commit gerrit/master..$x`; if [ ${#l} -eq 0 ]; then continue;  fi; echo -n $x; echo -n ' : ';echo $l; echo ; done"
+  rebi = !"git rebase --interactive HEAD~`git log --pretty=oneline --abbrev-commit gerrit/master..HEAD | wc -l`"
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  count = !"~/.git/tools/git-count"
+
+[branch]
+  autosetuprebase = always
+
+[help]
+  autocorrect = 1
+
+#[diff]
+#  external = git_diff_wrapper
+
+[core]
+  whitespace = trailing-space,space-before-tab
+  autocrlf = input
+  editor = vi
+
+[commit]
+  template = /home/fvisconte/.git-template.txt
+
+[giggle]
+  main-window-maximized = false
+  main-window-geometry = 1009x747+0+19
+  main-window-view = FileView
+  file-view-vpane-position = 431
+  history-view-vpane-position = 601
+
+[merge]
+  tool = meld
+
+[include]
+  path = ~/DotFiles/git/git-extras.conf
