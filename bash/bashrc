@@ -1,9 +1,0 @@
-
-if which zsh; then 
-  zsh
-else
-  echo "Zsh not found. Install it using:"
-  echo " sudo aptitude install zsh"
-  echo "   or:"
-  echo " su -c \"aptitude install zsh\""
-fi
