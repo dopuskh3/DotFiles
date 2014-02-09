@@ -1,0 +1,90 @@
+!w
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintslight
+
+!-------------------------------------------------------------------------------
+! URxvt settings
+! More info at:
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+!-------------------------------------------------------------------------------
+
+URxvt.depth: 32
+URxvt.geometry: 90x30
+URxvt.transparent: false
+URxvt.fading: 0
+! URxvt.urgentOnBell: true
+! URxvt.visualBell: true
+URxvt.loginShell: true
+URxvt.internalBorder: 3
+URxvt.lineSpace: 0
+
+! Fonts
+URxvt.allow_bold: false
+URxvt*font: xft:Dejavu Sans Mono:pixelsize=16
+URxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=16:bold
+URxvt*iso14755: false
+URxvt*iso14755_52: false
+
+! Fix font space
+URxvt*letterSpace: 0
+
+! Scrollbar
+URxvt.scrollStyle: rxvt
+URxvt.scrollBar: false
+
+! Perl extensions
+URxvt.perl-lib: /home/fvisconte/.urxvt/perl
+URxvt.perl-ext-common: default, clipboard,matcher
+URxvt.matcher.button: 1
+URxvt.urlLauncher: x-www-browser
+URxvt.keysym.S-C-c: perl:clipboard:copy
+URxvt.keysym.S-C-v: perl:clipboard:paste
+
+! Cursor
+URxvt.cursorBlink: true
+URxvt.cursorColor: #657b83
+URxvt.cursorUnderline: false
+  
+! Pointer
+URxvt.pointerBlank: true
+
+!black
+URxvt*color0:    #2e2f31
+URxvt*color8:    #46474a
+!red
+URxvt*color1:    #ba3259
+URxvt*color9:    #ba4e6d
+!green
+URxvt*color2:    #32ba50
+URxvt*color10:   #4eba66
+!yellow
+URxvt*color3:    #ba9432
+URxvt*color11:   #ba9c4e
+!blue
+URxvt*color4:    #3259bb
+URxvt*color12:   #4e6dba
+!magenta
+URxvt*color5:    #ba329d
+URxvt*color13:   #ba4ea3
+!cyan
+URxvt*color6:    #329dba
+URxvt*color14:   #4ea3ba
+!white
+URxvt*color7:    #bdc4cb
+URxvt*color15:   #d5dee5
+
+
+!!Source http://github.com/altercation/solarized
+
+URxvt*background: #2e2f31
+URxvt*foreground: #FFFFFF
+
+URxvt.saveLines: 100000
+

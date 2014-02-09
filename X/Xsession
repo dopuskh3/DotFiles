@@ -1,2 +1,1 @@
-exec gnome-session &
-exec awesome
+exec awesome > $HOME/.Xsession.log 2>&1
