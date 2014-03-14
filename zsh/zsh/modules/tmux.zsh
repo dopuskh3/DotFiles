@@ -1,4 +1,4 @@
-
+alias tmux="tmux -2"
 
 function tmux-list () {
   tmux has-session 2> /dev/null
