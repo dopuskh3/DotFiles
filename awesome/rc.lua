@@ -190,10 +190,10 @@ root.buttons(awful.util.table.join(
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     --- 
-    awful.key({ "Mod1", "Control"  }, "Left",   awful.tag.viewprev       ),
-    awful.key({ "Mod1", "Control"  }, "Right",  awful.tag.viewnext       ),
-    awful.key({ "Mod1", "Control"  }, "Escape", awful.tag.history.restore),
-    awful.key({ "Mod1",           }, "Tab",
+    awful.key({ "Mod1",   }, "Left",   awful.tag.viewprev       ),
+    awful.key({ "Mod1",   }, "Right",  awful.tag.viewnext       ),
+    awful.key({ "Mod1",   }, "Escape", awful.tag.history.restore),
+    awful.key({ "Mod1",   }, "Tab",
       function ()
         awful.client.focus.history.previous()
         if client.focus then
