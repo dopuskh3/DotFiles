@@ -105,6 +105,3 @@ fi
 
 
 
-export GOROOT=$HOME/go
-export GOPATH=$HOME/Hacks/gopackages
-export PATH=$PATH:$GOROOT/bin
