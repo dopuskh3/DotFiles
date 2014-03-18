@@ -9,20 +9,30 @@
 [keybindings]
 [profiles]
   [[default]]
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
     font = Inconsolata Medium 13
     background_image = None
-    show_titlebar = False
     use_system_font = False
     foreground_color = "#839496"
+    show_titlebar = False
     copy_on_selection = True
     background_color = "#002b36"
+  [[tomorow-night]]
+    palette = "#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8:#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8"
+    background_color = "#1d1f21"
+    background_image = None
+    foreground_color = "#c5c8c6"
+  [[tomorow-eighties]]
+    palette = "#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc:#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc"
+    background_color = "#2d2d2d"
+    background_image = None
+    foreground_color = "#cccccc"
 [layouts]
   [[default]]
     [[[child1]]]
       type = Terminal
       parent = window0
-      profile = solarized-dark
+      profile = tomorow-eighties
     [[[window0]]]
       type = Window
       parent = ""
