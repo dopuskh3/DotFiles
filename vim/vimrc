@@ -80,6 +80,8 @@ Bundle "lambdalisue/vim-python-virtualenv"
 Bundle "majutsushi/tagbar"
 Bundle "dhazel/conque-term"
 Bundle "OmniCppComplete"
+Bundle "altercation/vim-colors-solarized"
+Bundle "sjl/badwolf"
 " Bundle "justmao945/vim-clang"
 
 
