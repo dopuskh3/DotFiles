@@ -19,14 +19,22 @@
     background_color = "#002b36"
   [[tomorow-night]]
     palette = "#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8:#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8"
+    font = Inconsolata Medium 13
     background_color = "#1d1f21"
     background_image = None
     foreground_color = "#c5c8c6"
   [[tomorow-eighties]]
     palette = "#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc:#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc"
+    font = Inconsolata Medium 13
     background_color = "#2d2d2d"
     background_image = None
     foreground_color = "#cccccc"
+  [[tomorrow-mine]]
+    font = Inconsolata Medium 13
+    palette = "#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8:#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc"
+    background_color = "#1d1f21"
+    background_image = None
+    foreground_color = "#c5c8c6"
 [layouts]
   [[default]]
     [[[child1]]]
