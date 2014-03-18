@@ -12,6 +12,7 @@
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
     font = Inconsolata Medium 13
     background_image = None
+    show_titlebar = False
     use_system_font = False
     foreground_color = "#839496"
     copy_on_selection = True
