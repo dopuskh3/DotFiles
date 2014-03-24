@@ -1,4 +1,4 @@
-GERRIT_SERVER='no-gerrit-server-configured'
+GERRIT_SERVER='review.criteois.lan'
 
 function review () {
   local tmplog=`mktemp`
@@ -26,6 +26,18 @@ function review () {
   return $ret
 }
 
+function lsr () {
+  for branch in `git branch | sed 's/*//'`; do
+    l=`git log --pretty=oneline --abbrev-commit gerrit/master..$branch`
+    if [ ${#l} -eq 0 ]; then
+      continue;
+    fi;
+    echo "$branch :";
+    echo $l | sed 's/^/  /g';
+    echo ;
+  done
+}
+
 
 function review-stats () {
   local comment_req
@@ -42,7 +54,7 @@ function gerrit(){
   if [ "$1" = "" ]; then
     x-www-browser ${GERRIT_SERVER}
   else
-    ssh -p 29418 $USER@gerrit "gerrit $*"
+    ssh -p 29418 $USER@$GERRIT_SERVER "gerrit $*"
   fi
 }
 

@@ -1,5 +1,5 @@
 #D: g: git
-
+alias g="git"
 
 function grebi () {
   local reb

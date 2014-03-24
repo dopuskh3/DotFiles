@@ -1,7 +1,7 @@
 [user]
   name = Francois Visconte
-  email = f.visconte@gmail.com
-  signingkey = Francois VISCONTE <fvisconte@gmail.com>
+  email = f.visconte@criteo.com
+  signingkey = Francois VISCONTE <fvisconte@criteo.com>
 
 [color]
   ui = true
@@ -21,9 +21,9 @@
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' 
   a = config --get-regexp alias.*
   # list reviews on gerrit
-  lsr = !"for x in `git branch | sed 's/*//'`; do  l=`git log --pretty=oneline --abbrev-commit gerrit/master..$x`; if [ ${#l} -eq 0 ]; then continue;  fi; echo -n $x; echo -n ' : ';echo $l; echo ; done"
+  lsr = !"for x in `git branch | sed 's/*//'`; do  l=`git log --pretty=oneline --abbrev-commit gerrit/master..$x`; if [ ${#l} -eq 0 ]; then continue;  fi; echo $x; echo ' : ';echo $l; echo ; done"
   rebi = !"git rebase --interactive HEAD~`git log --pretty=oneline --abbrev-commit gerrit/master..HEAD | wc -l`"
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   count = !"~/.git/tools/git-count"
 
 [branch]
