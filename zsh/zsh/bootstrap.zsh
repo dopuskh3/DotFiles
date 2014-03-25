@@ -7,11 +7,15 @@ source ~/.zsh/aliases.zsh
 source ~/.zsh/bindings.zsh
 source ~/.zsh/completion.zsh
 
+zmodload zsh/terminfo
+
 disable -a ls
 loadmodules
 source ~/.zsh/init.zsh
+
 antigen-bundle zsh-users/zsh-syntax-highlighting
 antigen bundle kennethreitz/autoenv
+antigen bundle zsh-users/zsh-history-substring-search
 
 antigen-apply
 enable -a ls

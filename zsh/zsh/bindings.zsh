@@ -11,7 +11,7 @@ bindkey "\C$" end-of-line
 bindkey "\Ca" backward-delete-word
 bindkey "\Cf" backward-kill-line
 bindkey "\Cx" history-incremental-search-backward
-bindkey "\Cz" history-beginning-search-backward
+bindkey "\Cz" history-substring-search-up
 
 
 
