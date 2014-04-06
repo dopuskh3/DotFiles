@@ -82,6 +82,14 @@ Bundle "dhazel/conque-term"
 Bundle "OmniCppComplete"
 Bundle "altercation/vim-colors-solarized"
 Bundle "sjl/badwolf"
+Bundle "ervandew/supertab"
+
+" GO bundles
+Bundle "Blackrush/vim-gocode"
+Bundle "jnwhiteh/vim-golang"
+Bundle "scrooloose/syntastic"
+Bundle "dgryski/vim-godef"
+
 " Bundle "justmao945/vim-clang"
 
 
@@ -99,6 +107,12 @@ let g:NERDTreeWinPos='left'
 "
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_source_file_rec_max_cache_files=10000
+
+
+" Supertab configuration
+"
+let g:SuperTabDefaultCompletionType = "context"
+
 
 
 " Python-mode configuration
@@ -191,9 +205,14 @@ map <C-RightMouse> <C-T>
 let mapleader=";"
 let maplocalleader="_"
 
+inoremap <C-P> <C-X><C-O>
 
 " Filetype specific commands
 "
+filetype plugin on
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+
 if has("autocmd")
   autocmd BufWinLeave *.* mkview
   autocmd BufWinEnter *.* silent loadview
@@ -205,13 +224,41 @@ if has("autocmd")
   autocmd Filetype python set tags+=./python_tags
   autocmd Filetype cpp set tags+=~/.vim/tags/stl
   autocmd Filetype cpp set omnifunc=omni#cpp#complete#Main
-  " autocmd Filetype cpp inoremap <C-P> <C-X><C-O>
-
 endif " Has autocmd
 
 
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
+
+" Go langage tag configuration for tagbar
+"
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
 
 
 " let us view mapages
