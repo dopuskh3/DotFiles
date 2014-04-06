@@ -197,7 +197,7 @@ let maplocalleader="_"
 if has("autocmd")
   autocmd BufWinLeave *.* mkview
   autocmd BufWinEnter *.* silent loadview
-  autocmd BufWritePre *.py,*.txt,*.hh,*h,*.hpp,*.c,*.cpp,*.pp,*.html,*.js,*.css,*.rb call RTrim()
+  autocmd BufWritePre *.py,*.txt,*.hh,*h,*.hpp,*.c,*.cpp,*.pp,*.html,*.js,*.css,*.rb,*.groovy call RTrim()
   autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
   autocmd Filetype python match Excess /\%100v.*/
   autocmd FileType python set tags+=python_tags,tags
