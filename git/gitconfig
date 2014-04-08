@@ -41,7 +41,7 @@
   editor = vi
 
 [commit]
-  template = /home/fvisconte/.git-template.txt
+  template = ~/.git-template.txt
 
 [giggle]
   main-window-maximized = false
