@@ -54,6 +54,8 @@ set whichwrap=b,s,h,l,<,>,[,]       " when moving my cursor, wrap in all cases (
 set wildmenu                        " show a list of file when completing
 set wildmode=longest:list,full      " make file completion like bash
 set wrap                            " wrap long lines
+
+
 syntax on                           " Syntax hilighting by default
 filetype off
 filetype plugin indent on
@@ -74,8 +76,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle "rodjek/vim-puppet"
 Bundle "Shougo/vimproc.vim"
 Bundle "Lokaltog/vim-powerline"
-Bundle "davidhalter/jedi-vim"
 Bundle "klen/python-mode"
+Bundle "davidhalter/jedi-vim"
 Bundle "lambdalisue/vim-python-virtualenv"
 Bundle "majutsushi/tagbar"
 Bundle "dhazel/conque-term"
@@ -89,8 +91,6 @@ Bundle "Blackrush/vim-gocode"
 Bundle "jnwhiteh/vim-golang"
 Bundle "scrooloose/syntastic"
 Bundle "dgryski/vim-godef"
-
-" Bundle "justmao945/vim-clang"
 
 
 " Tagbar configuration
@@ -113,49 +113,6 @@ let g:unite_source_file_rec_max_cache_files=10000
 "
 let g:SuperTabDefaultCompletionType = "context"
 
-
-
-" Python-mode configuration
-"
-let g:pymode_rope = 0
-" Documentation
-let g:pymode_doc = 1
-let g:pymode_doc_key = 'K'
-" Linting
-let g:pymode_lint = 1
-let g:pymode_lint_checker = "pylint,pep8"
-" Auto check on save
-let g:pymode_lint_write = 1
-" Support virtualenv
-let g:pymode_virtualenv = 1
-" Enable breakpoints plugin
-" let g:pymode_breakpoint = 1
-" let g:pymode_breakpoint_key = '<leader>b'
-"
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-" Don't autofold code
-" let g:pymode_folding = 0
-
-" Jedi configuration:
-" 
-let g:jedi#autocompletion_command = "<C-Space>"
-
-" OmniCpp configuration:
-"
-let OmniCpp_MayCompleteDot=1
-let OmniCpp_MayCompleteArrow=1
-let OmniCpp_MayCompleteScope=1
-let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
-let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
 " Some custom functions
 "
@@ -205,63 +162,23 @@ map <C-RightMouse> <C-T>
 let mapleader=";"
 let maplocalleader="_"
 
-inoremap <C-P> <C-X><C-O>
 
 " Filetype specific commands
 "
 filetype plugin on
 filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
 
 if has("autocmd")
   autocmd BufWinLeave *.* mkview
   autocmd BufWinEnter *.* silent loadview
   autocmd BufWritePre *.py,*.txt,*.hh,*h,*.hpp,*.c,*.cpp,*.pp,*.html,*.js,*.css,*.rb,*.groovy call RTrim()
-  autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-  autocmd Filetype python match Excess /\%100v.*/
-  autocmd FileType python set tags+=python_tags,tags
-  " autocmd Filetype python silent! !ctags -R ./&
-  autocmd Filetype python set tags+=./python_tags
-  autocmd Filetype cpp set tags+=~/.vim/tags/stl
-  autocmd Filetype cpp set omnifunc=omni#cpp#complete#Main
 endif " Has autocmd
 
 
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-
-" Go langage tag configuration for tagbar
-"
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
-
-
 " let us view mapages
+"
 runtime ftplugin/man.vim
 
 " GUI specific things
