@@ -35,11 +35,11 @@ set report=0                        " allways report changes in file
 set ruler                           " show the cursor position all the time
 set scrolloff=8                     " scroll buffer 8 line before/after
 set shell=zsh                       " my shell
-set shiftwidth=2                    " shift width
 set showbreak=>\ \ \
 set showcmd                         " Show (partial) command in status line.
 set showmatch                       " Show matching brackets.
 set smarttab
+set shiftwidth=2                    " shift width
 set softtabstop=2                   " soft tabs
 set statusline=%58(%-15t\ \ %Y%M\ \ #%2n\ \ %3v,%-3l\ of\ %L\ \ %5P%)
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc

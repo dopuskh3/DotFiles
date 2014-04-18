@@ -29,6 +29,7 @@ installlink git/gitconfig .gitconfig
 installlink git/git-template.txt .git-template.txt
 installlink fonts/ .fonts
 installlink terminator/config .config/terminator/config
+installlink ctags/ctags .ctags
 
 for install_file in */install.sh; do
   chmod +x $install_file
