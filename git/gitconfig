@@ -26,6 +26,7 @@
   lg = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   count = !"~/.git/tools/git-count"
   fa = fetch --all
+  cb = !"echo -n 'Branch name: '; read b; bname=`echo $b | tr '[:upper:]' '[:lower:]' | tr ' ' '_' | sed 's/_*$//g'` && git checkout -b $bname $*"
 
 [branch]
   autosetuprebase = always

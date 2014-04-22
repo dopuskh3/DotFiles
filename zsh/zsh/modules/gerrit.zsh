@@ -3,18 +3,22 @@ GERRIT_STANDARD_BRANCH='origin'
 
 function review () {
   local tmplog=`mktemp`
-  if [ $# = 0 ]; then
+
+  if [ "$1" = "-a" ]; then
     zlog "Pushing all reviews:"
     git --no-pager log --format='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' gerrit/master..HEAD
     git push origin HEAD:refs/publish/master > $tmplog 2>&1
     ret=$?
-  else
+  elif [ $# -gt 0 ]; then
     for i in $*; do
       zlog "Pushing $i:"
       zlog "  `git log -1 --format="%s" $i`"
       git push origin $i\:refs/publish/master > $tmplog 2>&1
       ret=$?
     done
+  else
+      zlogerr "Not commit selected"
+      return
   fi
   if [ $ret != 0 ]; then
     zlogerr "Error: "
@@ -61,3 +65,7 @@ function gerrit(){
 }
 
 alias gerrit-install-hook="scp -P 29418  ${GERRIT_SERVER}:hooks/commit-msg .git/hooks/"
+alias rpush="git review "
+alias rlist="git review --list"
+alias rpull="git review --download"
+alias rpick="git review --cherrypick"
