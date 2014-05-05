@@ -64,8 +64,17 @@ function gerrit(){
   fi
 }
 
+function rstart() {
+  echo -n "Feature name: "
+  read feature_name
+  branch_name=`echo $feature_name | tr '[:upper:]' '[:lower:]' | tr ' ' '_' | sed 's/_*$//g'`
+  git checkout -b  ${branch_name} --track ${GERRIT_STANDARD_BRANCH}
+
+}
+
 alias gerrit-install-hook="scp -P 29418  ${GERRIT_SERVER}:hooks/commit-msg .git/hooks/"
 alias rpush="git review "
 alias rlist="git review --list"
 alias rpull="git review --download"
 alias rpick="git review --cherrypick"
+

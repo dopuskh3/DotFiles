@@ -2,7 +2,7 @@
 #
 #
 local args
-args=("${(@f)$(git log --format="%h:%s" gerrit/master..HEAD)}")
+args=("${(@f)$(git log --format="%h:%s" origin/master..HEAD)}")
 _arguments -C '*:command:->command'
 _describe -t commits 'commit' args
 return 0
