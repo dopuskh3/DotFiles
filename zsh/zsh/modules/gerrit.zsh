@@ -74,6 +74,7 @@ function rstart() {
 
 alias gerrit-install-hook="scp -P 29418  ${GERRIT_SERVER}:hooks/commit-msg .git/hooks/"
 alias rpush="git review "
+alias dpush="git review --draft"
 alias rlist="git review --list"
 alias rpull="git review --download"
 alias rpick="git review --cherrypick"

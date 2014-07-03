@@ -52,7 +52,7 @@ fi
 
 
 if swhich keychain; then
-  keychain -q id_rsa
+  keychain -q id_dsa
 	host=`uname -n `
 	[ -f $HOME/.keychain/$host-sh ] && source $HOME/.keychain/$host-sh
 else
@@ -103,5 +103,5 @@ if [ "$TERM" != "screen" ]; then
 fi
 
 
-
+export PATH=$PATH:/usr/local/mono/bin
 

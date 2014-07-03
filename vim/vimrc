@@ -139,7 +139,7 @@ endfunction
 map ;e :QFix<CR>
 map ;t :NERDTreeToggle<CR>
 map <F2> :NERDTreeToggle<CR>
-nnoremap <C-p> :Unite -start-insert file_rec/async<CR>
+nnoremap <C-p> :Unite -start-insert -buffer-name=files file_rec<CR>
 nnoremap <space>/ :Unite grep:.<CR>
 nnoremap <C-space> :Unite -quick-match buffer<CR>
 map ;q :bp<CR>
@@ -168,6 +168,7 @@ let maplocalleader="_"
 filetype plugin on
 filetype plugin indent on
 
+
 if has("autocmd")
   autocmd BufWinLeave *.* mkview
   autocmd BufWinEnter *.* silent loadview
@@ -190,3 +191,7 @@ if has("gui_running")
   set guifont=Inconsolata\ 12
 endif
 colorscheme tomorrow-night-eighties
+
+
+" highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+" match OverLength /\%81v.*/
