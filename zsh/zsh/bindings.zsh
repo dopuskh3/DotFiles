@@ -1,7 +1,7 @@
 
-bindkey -v
+# bindkey -v
 
-# bindkey "\Cs" history-incremental-search-backward
+bindkey "\Cs" history-incremental-search-backward
 
 bindkey "\C1" beginning-of-line
 bindkey "\CH" beginning-of-line

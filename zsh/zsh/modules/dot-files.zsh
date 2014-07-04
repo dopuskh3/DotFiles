@@ -1,8 +1,5 @@
 # dot-files module
 #
-#
-#
-#
 
 DOTFILE_PATH=$HOME/DotFiles
 DOTFILE_REMOTE=git@github.com:dopuskh3/DotFiles
