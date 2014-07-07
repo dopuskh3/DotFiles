@@ -11,6 +11,8 @@ function installlink(){
 
 }
 
+git submodule sync
+
 installlink zsh/zshrc .zshrc
 installlink zsh/zsh   .zsh
 installlink screen/screenrc .screenrc
