@@ -11,7 +11,7 @@ function installlink(){
 
 }
 
-git submodule sync
+git submodule update --init --recursive
 
 installlink zsh/zshrc .zshrc
 installlink zsh/zsh   .zsh
