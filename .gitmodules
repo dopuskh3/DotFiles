@@ -1,3 +1,6 @@
 [submodule "zsh/antigen"]
 	path = zsh/antigen
 	url = https://github.com/zsh-users/antigen
+[submodule "vim/third-party/thomorrow-theme"]
+	path = vim/third-party/thomorrow-theme
+	url = https://github.com/chriskempson/tomorrow-theme

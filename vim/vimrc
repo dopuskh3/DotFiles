@@ -72,7 +72,6 @@ Bundle 'gmarik/vundle'
 Bundle "fholgado/minibufexpl.vim"
 Bundle 'scrooloose/nerdtree'
 Bundle 'Shougo/unite.vim'
-Bundle 'altercation/vim-colors-solarized'
 Bundle "rodjek/vim-puppet"
 Bundle "Shougo/vimproc.vim"
 Bundle "Lokaltog/vim-powerline"
@@ -82,7 +81,6 @@ Bundle "lambdalisue/vim-python-virtualenv"
 Bundle "majutsushi/tagbar"
 Bundle "dhazel/conque-term"
 Bundle "OmniCppComplete"
-Bundle "altercation/vim-colors-solarized"
 Bundle "sjl/badwolf"
 Bundle "ervandew/supertab"
 
@@ -190,7 +188,7 @@ if has("gui_running")
   set guioptions=mr
   set guifont=Inconsolata\ 12
 endif
-colorscheme tomorrow-night-eighties
+colorscheme Tomorrow-Night-Eighties
 
 
 " highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
