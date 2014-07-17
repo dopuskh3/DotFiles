@@ -121,8 +121,3 @@ function dot-update () {
 }
 
 
-if [ ! -d $DOTFILE_PATH ]; then
-  zlogerr "Your dot-files are not installed. Please run dot-setup/dot-reinstall"
-else
-  dot-status
-fi
