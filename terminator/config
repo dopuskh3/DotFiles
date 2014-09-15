@@ -21,36 +21,36 @@
     background_color = "#2d2d2d"
   [[tomorrow-mine]]
     palette = "#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8:#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc"
-    font = Inconsolata Medium 13
+    copy_on_selection = True
     background_image = None
     background_darkness = 0.9
     background_type = transparent
     use_system_font = False
     foreground_color = "#c5c8c6"
     show_titlebar = False
-    copy_on_selection = True
+    font = Inconsolata Medium 13
     background_color = "#1d1f21"
   [[tomorow-eighties]]
     palette = "#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc:#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#cccccc"
-    font = Inconsolata Medium 13
+    copy_on_selection = True
     background_image = None
     background_darkness = 0.9
     background_type = transparent
     use_system_font = False
     foreground_color = "#cccccc"
     show_titlebar = False
-    copy_on_selection = True
+    font = Inconsolata Medium 13
     background_color = "#2d2d2d"
   [[tomorow-night]]
     palette = "#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8:#1d1f21:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c6c8"
-    font = Inconsolata Medium 13
+    copy_on_selection = True
     background_image = None
     background_darkness = 0.9
     background_type = transparent
     use_system_font = False
     foreground_color = "#c5c8c6"
     show_titlebar = False
-    copy_on_selection = True
+    font = Inconsolata Medium 13
     background_color = "#1d1f21"
 [layouts]
   [[default]]

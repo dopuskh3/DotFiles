@@ -1,7 +1,7 @@
 [user]
   name = Francois Visconte
   email = f.visconte@criteo.com
-  signingkey = Francois VISCONTE <fvisconte@criteo.com>
+  signingkey = Francois VISCONTE <f.visconte@criteo.com>
 
 [color]
   ui = true
