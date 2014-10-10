@@ -103,7 +103,7 @@ if [ "$TERM" != "screen" ]; then
 fi
 
 
-export PATH=$PATH:/usr/local/mono/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 # Dot files check
 if [ ! -d $DOTFILE_PATH ]; then

@@ -74,7 +74,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Shougo/unite.vim'
 Bundle "rodjek/vim-puppet"
 Bundle "Shougo/vimproc.vim"
-Bundle "Lokaltog/vim-powerline"
 Bundle "klen/python-mode"
 Bundle "davidhalter/jedi-vim"
 Bundle "lambdalisue/vim-python-virtualenv"
@@ -83,6 +82,7 @@ Bundle "dhazel/conque-term"
 Bundle "OmniCppComplete"
 Bundle "sjl/badwolf"
 Bundle "ervandew/supertab"
+Bundle "Lokaltog/powerline", {'rtp': 'powerline/bindings/vim' }
 
 " GO bundles
 Bundle "Blackrush/vim-gocode"
