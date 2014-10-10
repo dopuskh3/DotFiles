@@ -2,7 +2,6 @@
 !-------------------------------------------------------------------------------
 ! Xft settings
 !-------------------------------------------------------------------------------
-
 Xft.dpi: 96
 Xft.antialias: true
 Xft.rgba: rgb
@@ -27,9 +26,9 @@ URxvt.lineSpace: 0
 
 ! Fonts
 URxvt.allow_bold: false
-URxvt*font: xft:Dejavu Sans Mono:pixelsize=16
-URxvt*boldFont: xft:Dejavu Sans Mono:pixelsize=16:bold
-URxvt*iso14755: false
+URxvt*font: xft:Liberation Mono:pixelsize=15
+URxvt*boldFont: xft:Liberation Mono:pixelsize=15:bold
+URxvt*iso15755: false
 URxvt*iso14755_52: false
 
 ! Fix font space
@@ -79,12 +78,7 @@ URxvt*color14:   #4ea3ba
 !white
 URxvt*color7:    #bdc4cb
 URxvt*color15:   #d5dee5
-
-
-!!Source http://github.com/altercation/solarized
-
 URxvt*background: #2e2f31
 URxvt*foreground: #FFFFFF
-
 URxvt.saveLines: 100000
 
