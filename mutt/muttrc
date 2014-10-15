@@ -1,5 +1,6 @@
 
 source ~/.mutt/account
+
 set locale="en_US"
 set date_format="%A %d %b %Y à %H:%M:%S (%Z)"
 set attribution="%d, %n"
