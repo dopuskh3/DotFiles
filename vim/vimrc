@@ -82,7 +82,7 @@ Bundle "dhazel/conque-term"
 Bundle "OmniCppComplete"
 Bundle "sjl/badwolf"
 Bundle "ervandew/supertab"
-Bundle "Lokaltog/powerline", {'rtp': 'powerline/bindings/vim' }
+Bundle "tpope/vim-git"
 
 " GO bundles
 Bundle "Blackrush/vim-gocode"
