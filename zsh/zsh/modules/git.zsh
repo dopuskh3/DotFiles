@@ -1,5 +1,6 @@
 #D: g: git
 alias g="git"
+GIT_CONFIG_DIR="${HOME}/.git"
 
 function grebi () {
   local reb
@@ -58,6 +59,10 @@ function checkout_or_create_branch () {
   if [ $# = 2 ]; then
     git checkout $1 --track $2
   fi
+}
+
+function git-setup () {
+  rsync -avu --delete ${GIT_CONFIG_DIR}/hooks/ `git rev-parse --git-dir`/hooks
 }
 
 alias g="git"

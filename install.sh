@@ -28,6 +28,7 @@ installlink bash/bashrc .bashrc
 installlink tmux/tmux.conf .tmux.conf
 installlink tmux/tmuxinator .tmuxinator
 installlink git/gitconfig .gitconfig
+installlink git .git
 installlink git/git-template.txt .git-template.txt
 installlink fonts/ .fonts
 installlink terminator/config .config/terminator/config
