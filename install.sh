@@ -18,6 +18,8 @@ installlink zsh/zsh   .zsh
 installlink screen/screenrc .screenrc
 installlink vim/vim .vim
 installlink vim/vimrc .vimrc
+installlink vim/vim .nvim
+installlink vim/vimrc .nvimrc
 installlink pylint/pylintrc .pylintrc
 installlink python/pythonrc .pythonrc
 installlink awesome .config/awesome

@@ -125,9 +125,12 @@ function! QFixToggle(forced)
   endif
 endfunction
 
+
+
 function! RTrim()
   let vw=winsaveview()
   %s/\v\s+$//e
+  %s#\($\n\s*\)\+\%$##e
   call winrestview(vw)
   noh
 endfunction
