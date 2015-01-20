@@ -35,6 +35,7 @@ installlink git/git-template.txt .git-template.txt
 installlink fonts/ .fonts
 installlink terminator/config .config/terminator/config
 installlink ctags/ctags .ctags
+installlink scripts/spotify-command bin/spotify-command
 
 for install_file in */install.sh; do
   chmod +x $install_file
@@ -43,4 +44,3 @@ for install_file in */install.sh; do
     source $install_file
   fi
 done
-

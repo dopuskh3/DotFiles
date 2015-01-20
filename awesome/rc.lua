@@ -15,18 +15,18 @@ require("debian.menu")
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
+lock_command = "/usr/lib/unity/unity-panel-service --lockscreen-mode"
 terminal = "x-terminal-emulator"
 browser = "x-www-browser"
 filebrowser = "nautilus"
 mail = "thunderbird"
-soundpreferences = "gnome-control-center sound"
 -- joinsession = "bash -c \"foo=`zenity --entry --text \\\"Session ?\\\"`; x-terminal-emulator -e \\\"tmux new -t $foo || tmux new -s $foo\\\"\""
 
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
-playernext = "rhythmbox-client --next"
-playerprev = "rhythmbox-client --previous"
-playerpause = "rhythmbox-client --play-pause"
+playernext = "spotify-command next"
+playerprev = "spotify-command previous"
+playerpause = "spotify-command playpause"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -232,6 +232,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", modkey, "Mod1" }, "space", function() awful.util.spawn(playerpause) end),
     -- awful.key({ modkey,           }, "s", function () awful.util.spawn(joinsession) end),
     awful.key({ modkey,           }, "c", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "l", function () awful.util.spawn(lock_command) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control"   }, "q", awesome.quit),
 
@@ -416,12 +417,10 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 
-awful.util.spawn_with_shell("gnome-settings-daemon")
+awful.util.spawn_with_shell("unity-settings-daemon")
 awful.util.spawn_with_shell("nm-applet")
+awful.util.spawn_with_shell("spotify")
 awful.util.spawn_with_shell("gnome-sound-applet")
 awful.util.spawn_with_shell("pidgin")
--- awful.util.spawn_with_shell("autocutsel")
--- awful.util.spawn_with_shell("autocutsel -s PRIMARY")
-
 
 -- }}}
