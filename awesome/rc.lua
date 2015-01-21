@@ -19,7 +19,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 commands = {
-  lock = "gnome-screensaver-command --lock",
+  lock = "light-locker-command --lock",
   terminal = "x-terminal-emulator",
   browser = "x-www-browser",
   filebrowser = "nautilus",
@@ -32,6 +32,7 @@ commands = {
 }
 
 startup_commands = {
+  "light-locker",
   "unity-settings-daemon",
   "nm-applet",
   "spotify",
