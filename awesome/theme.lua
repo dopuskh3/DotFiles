@@ -6,19 +6,19 @@ theme = {}
 
 theme.font          = "sans 8"
 
-theme.bg_normal     = "#f2f1f0"
-theme.bg_focus      = "#9398a4"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
+theme.bg_normal     = "#2B202E"
+theme.bg_focus      = "#2B202E"
+theme.bg_urgent     = "#FF952B"
+theme.bg_minimize   = "#690237"
 
-theme.fg_normal     = "#3c3c3c"
-theme.fg_focus      = "#000000"
+theme.fg_normal     = "#FF602B"
+theme.fg_focus      = "#FF952B"
 theme.fg_urgent     = "#000000"
 theme.fg_minimize   = "#000000"
 
 theme.border_width  = "1"
 theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
+theme.border_focus  = "#FF952B"
 theme.border_marked = "#91231c"
 
 
