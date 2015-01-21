@@ -9,7 +9,7 @@
 set autoindent                      " always set autoindenting on
 set backspace=indent,eol,start      " more powerful backspacing
 set backupdir=/tmp
-set clipboard=autoselect            " clipboard
+" set clipboard=autoselect            " clipboard
 set cmdheight=1                     " cmd line height
 set confirm                         " confirm before quitting unsaved
 set cursorline
