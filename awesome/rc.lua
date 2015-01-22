@@ -320,9 +320,9 @@ globalkeys = awful.util.table.join(
     function ()
       local curidx = awful.tag.getidx()
       if curidx == 1 then
-        awful.client.movetotag(tags[client.focus.screen][9])
+        awful.client.movetotag(tags[mouse.screen][9])
       else
-        awful.client.movetotag(tags[client.focus.screen][curidx-1])
+        awful.client.movetotag(tags[mouse.screen][curidx-1])
       end
     end
   ),
@@ -330,9 +330,9 @@ globalkeys = awful.util.table.join(
     function ()
       local curidx = awful.tag.getidx()
       if curidx == 1 then
-        awful.client.movetotag(tags[client.focus.screen][9])
+        awful.client.movetotag(tags[mouse.screen][9])
       else
-        awful.client.movetotag(tags[client.focus.screen][curidx-1])
+        awful.client.movetotag(tags[mouse.screen][curidx-1])
       end
     end
   ),
