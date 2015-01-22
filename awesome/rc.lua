@@ -13,6 +13,27 @@ function run_command_cb (command)
 end
 -- }}}
 
+--{{---| Error handling |---------------------------------------------------------------------------
+
+if awesome.startup_errors then
+  naughty.notify({ preset = naughty.config.presets.critical,
+  title = "Oops, there were errors during startup!",
+  text = awesome.startup_errors })
+end
+do
+  local in_error = false
+  awesome.add_signal("debug::error", function (err)
+    if in_error then return end
+    in_error = true
+    naughty.notify({ preset = naughty.config.presets.critical,
+    title = "Oops, an error happened!",
+    text = err })
+    in_error = false
+  end)
+end
+
+
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme.lua")
