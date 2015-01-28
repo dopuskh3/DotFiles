@@ -316,26 +316,6 @@ globalkeys = awful.util.table.join(
       awful.util.getdir("cache") .. "/history_eval")
     end
   ),
-  awful.key({ "Mod1"   }, "Left",
-    function ()
-      local curidx = awful.tag.getidx()
-      if curidx == 1 then
-        awful.client.movetotag(tags[mouse.screen][9])
-      else
-        awful.client.movetotag(tags[mouse.screen][curidx-1])
-      end
-    end
-  ),
-  awful.key({ "Mod1"  }, "Right",
-    function ()
-      local curidx = awful.tag.getidx()
-      if curidx == 1 then
-        awful.client.movetotag(tags[mouse.screen][9])
-      else
-        awful.client.movetotag(tags[mouse.screen][curidx-1])
-      end
-    end
-  ),
   awful.key({ "Mod1" }, "s", 
     function(c)
       local newscreen = mouse.screen + 1
