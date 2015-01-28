@@ -52,7 +52,7 @@ fi
 
 
 if swhich keychain; then
-  keychain -q id_dsa id_rsa
+  keychain -Q -q id_dsa id_rsa
 	host=`uname -n `
 	[ -f $HOME/.keychain/$host-sh ] && source $HOME/.keychain/$host-sh
 else
