@@ -175,7 +175,7 @@ if has("autocmd")
   autocmd BufWinEnter *.* silent loadview
   autocmd BufWritePre *.py,*.txt,*.hh,*h,*.hpp,*.c,*.cpp,*.pp,*.html,*.js,*.css,*.rb,*.groovy call RTrim()
   autocmd Filetype gitcommit set textwidth=72
-  autocmd Filetype gitcommit set makeprg=python\ /home/f.visconte/git-validate-commit.py\ %
+  autocmd Filetype gitcommit set makeprg=python\ /home/f.visconte/scripts/git-validate-commit.py\ %
   autocmd Filetype gitcommit set efm=%l:%c:%m
   autocmd BufWritePost COMMIT_EDITMSG make
 endif " Has autocmd
