@@ -103,7 +103,6 @@ if [ "$TERM" != "screen" ]; then
 fi
 
 
-export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 # Dot files check
 if [ ! -d $DOTFILE_PATH ]; then
