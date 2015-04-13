@@ -90,6 +90,12 @@ Bundle "jnwhiteh/vim-golang"
 Bundle "scrooloose/syntastic"
 Bundle "dgryski/vim-godef"
 
+" Scala bundles
+Bundle 'derekwyatt/vim-scala'
+
+"Clojure bundles
+Bundle 'guns/vim-clojure-static'
+
 
 " Tagbar configuration
 "

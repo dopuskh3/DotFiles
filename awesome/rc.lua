@@ -2,6 +2,7 @@ require("awful")
 require("awful.autofocus")
 require("awful.rules")
 require("awful.util")
+require("vicious")
 require("beautiful")
 require("naughty")
 
@@ -38,6 +39,7 @@ end
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
+
 -- This is used later as the default terminal and editor to run.
 commands = {
   lock = "light-locker-command --lock",
@@ -50,15 +52,15 @@ commands = {
   player_pause = "spotify-command playpause",
   volume_up = "amixer -D pulse sset Master 5%+",
   volume_down = "amixer -D pulse sset Master 5%-",
+  wallpaper = "awsetbg " .. os.getenv("HOME") .. "/.config/awesome/wallpaper.jpg" 
 }
 
 startup_commands = {
   "light-locker",
   "unity-settings-daemon",
   "nm-applet",
-  "spotify",
   "gnome-sound-applet",
-  "pidgin",
+  commands["wallpaper"],
 }
 
 -- Default modkey.
@@ -113,9 +115,15 @@ end
 -- {{{ Menu
 mymainmenu = awful.menu({
   items = { 
+    { "Terminal", commands["terminal"] },
+    { "Browser", commands["browser"] },
+    { "Mail", commands["mail"] },
+    { "IntelliJ", os.getenv("HOME") .. "/.local/idea/bin/idea.sh" },
+    { "Pidgin", "pigin" },
+    { "Spotify", "spotify" },
+    { "Wallpaper", commands["wallpaper"] },
     { "restart", awesome.restart },
     { "quit", awesome.quit },
-    { "open terminal", terminal },
   }})
 
 mylauncher = awful.widget.launcher({
@@ -156,7 +164,7 @@ mytasklist.buttons = awful.util.table.join(
     c:raise()
   end),
   awful.button({ }, 3, function ()
-    if instance then
+    if instancwe then
       instance:hide()
       instance = nil
     else
@@ -174,6 +182,31 @@ mytasklist.buttons = awful.util.table.join(
 )
 
 for s = 1, screen.count() do
+  -- CPU Usage 
+  -- Initialize widget
+  cpuwidget = awful.widget.graph()
+  -- -- Graph properties
+  cpuwidget:set_width(50)
+  cpuwidget:set_background_color("#494B4F")
+  cpuwidget:set_color("#FF5656")
+  cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+  -- -- Register widget
+  vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
+  -- Initialize widget
+  memwidget = awful.widget.graph()
+  -- -- Graph properties
+  memwidget:set_width(50)
+  memwidget:set_background_color("#494B4F")
+  memwidget:set_color("#FF5656")
+  memwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+
+  -- Battery widget
+  -- batwidget = awful.widget.text()
+  --vicious.register(batwidget, vicious.widgets.bat, "$1 $2 $3")
+
+  -- -- Register widget
+  vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
+  --
   -- Create a promptbox for each screen
   -- ######## Line too long (92 chars) ######## :
   mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
@@ -206,6 +239,9 @@ for s = 1, screen.count() do
       layout = awful.widget.layout.horizontal.leftright
     },
     mylayoutbox[s],
+    cpuwidget, 
+    memwidget,
+   -- batwidget,
     mytextclock,
     s == 1 and mysystray or nil,
     mytasklist[s],

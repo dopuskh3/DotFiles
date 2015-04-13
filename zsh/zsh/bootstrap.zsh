@@ -17,9 +17,9 @@ antigen-use oh-my-zsh
 antigen-bundle zsh-users/zsh-syntax-highlighting
 antigen bundle kennethreitz/autoenv
 antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle tarruda/zsh-autosuggestions
 
 antigen-theme bira
 
 antigen-apply
 enable -a ls
-
