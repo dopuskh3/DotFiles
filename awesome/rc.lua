@@ -12,6 +12,21 @@ function run_command_cb (command)
     awful.util.spawn(command)
   end)
 end
+
+-- Tag functions to switch tag on all screens at once
+function nextTag ()
+    for s = 1, screen.count() do
+      awful.tag.viewnext(screen[s])
+    end
+end
+
+function prevTag ()
+    for s = 1, screen.count() do
+      awful.tag.viewprev(screen[s])
+    end
+end
+
+
 -- }}}
 
 --{{---| Error handling |---------------------------------------------------------------------------
@@ -43,6 +58,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 -- This is used later as the default terminal and editor to run.
 commands = {
   lock = "light-locker-command --lock",
+  ide = "/home/f.visconte/.local/idea/bin/idea.sh",
   terminal = "x-terminal-emulator",
   browser = "x-www-browser",
   filebrowser = "nautilus",
@@ -122,8 +138,8 @@ mymainmenu = awful.menu({
     { "Pidgin", "pigin" },
     { "Spotify", "spotify" },
     { "Wallpaper", commands["wallpaper"] },
-    { "restart", awesome.restart },
-    { "quit", awesome.quit },
+    { "Restart", awesome.restart },
+    { "Quit", awesome.quit },
   }})
 
 mylauncher = awful.widget.launcher({
@@ -150,8 +166,8 @@ mytaglist.buttons = awful.util.table.join(
   awful.button({ modkey }, 1, awful.client.movetotag),
   awful.button({ }, 3, awful.tag.viewtoggle),
   awful.button({ modkey }, 3, awful.client.toggletag),
-  awful.button({ }, 4, awful.tag.viewnext),
-  awful.button({ }, 5, awful.tag.viewprev)
+  awful.button({ }, 4, nextTag),
+  awful.button({ }, 5, prevTag)
 )
 
 mytasklist = {}
@@ -253,15 +269,14 @@ end
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
   awful.button({ }, 3, function () mymainmenu:toggle() end),
-  awful.button({ }, 4, awful.tag.viewnext),
-  awful.button({ }, 5, awful.tag.viewprev)
-))
-  -- }}}
+  awful.button({ }, 4, nextTag),
+  awful.button({ }, 5, prevTag)))
+-- }}}
 
---- {{{ Global keys 
-globalkeys = awful.util.table.join(
-  awful.key({ "Mod1", }, "Left",   awful.tag.viewprev       ),
-  awful.key({ "Mod1", }, "Right",  awful.tag.viewnext       ),
+  --- {{{ Global keys 
+  globalkeys = awful.util.table.join(
+  awful.key({ "Mod1", }, "Left",  prevTag),
+  awful.key({ "Mod1", }, "Right",  nextTag),
   awful.key({ "Mod1", }, "Escape", awful.tag.history.restore),
   awful.key({ "Mod1", }, "Tab",
     function ()
@@ -399,6 +414,7 @@ clientkeys = awful.util.table.join(
   -- Bind all key numbers to tags.
   -- Be careful: we use keycodes to make it works on any keyboard layout.
   -- This should map on the top row of your keyboard, usually 1 to 9.
+
   for i = 1, keynumber do
     globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, "#" .. i + 9,

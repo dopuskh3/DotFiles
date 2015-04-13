@@ -47,7 +47,6 @@ set tabstop=2
 set tags=./tags
 set textwidth=0                     " Don't wrap lines by default
 set title                           " change terminal title
-set ttyfast                         " i'm fast
 set viminfo='20,\"50                " read/write a .viminfo file, don't store more than
 set visualbell t_vb=""              " visual bell
 set whichwrap=b,s,h,l,<,>,[,]       " when moving my cursor, wrap in all cases (don't get stuck at end of line, etc)
@@ -83,6 +82,8 @@ Bundle "OmniCppComplete"
 Bundle "sjl/badwolf"
 Bundle "ervandew/supertab"
 Bundle "dopuskh3/vim-git"
+Bundle "derekwyatt/vim-scala"
+Bundle "ryanss/vim-hackernews"
 
 " GO bundles
 Bundle "Blackrush/vim-gocode"
