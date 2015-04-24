@@ -33,6 +33,7 @@ installlink git/gitconfig .gitconfig
 installlink git .git
 installlink git/git-template.txt .git-template.txt
 installlink fonts/ .fonts
+installlink fonts/fonts.conf .fonts.conf
 installlink terminator/config .config/terminator/config
 installlink ctags/ctags .ctags
 installlink scripts/spotify-command bin/spotify-command
