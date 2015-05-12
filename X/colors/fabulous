@@ -1,0 +1,28 @@
+!! Fabulous
+*foreground:	rgb:ff/ff/ff
+*background:	rgb:10/10/10
+!black
+*color0:		rgb:1f/1f/1f
+*color8:		rgb:30/30/30
+!red
+*color1:		rgb:9d/2a/2a
+*color9:		rgb:7f/00/00
+!green
+*color2:		rgb:9f/ca/4f
+*color10:		rgb:85/b0/34
+!brown/yellow
+*color3:		rgb:ff/e1/61
+*color11:		rgb:ff/c4/42
+!blue
+*color4:		rgb:65/8b/ce
+*color12:		rgb:3b/5d/9a
+!magenta
+*color5:		rgb:b6/98/d9
+*color13:		rgb:a5/7a/c4
+!cyan
+*color6:		rgb:7a/b6/e4
+*color14:		rgb:5d/a7/e1
+!white
+*color7:		rgb:ee/ee/ec
+*color15:		rgb:d3/d7/cf
+

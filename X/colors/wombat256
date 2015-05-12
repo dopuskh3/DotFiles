@@ -1,0 +1,52 @@
+! Taken from wombat256.vim Normal entry after snapping to pallete values
+URxvt*background: #1c1c1c
+URxvt*foreground: #c6c6c6
+
+*color0:     rgb:00/00/00
+*color1:     rgb:bf/72/76
+*color2:     rgb:86/af/80
+*color3:     rgb:96/8a/38
+*color4:     rgb:36/73/b5
+*color5:     rgb:9a/70/b2
+*color6:     rgb:7a/be/cc
+*color7:     rgb:db/db/db
+*color8:     rgb:66/92/af
+*color9:     rgb:e5/50/5f
+*color10:    rgb:87/bc/87
+*color11:    rgb:e0/d9/5c
+*color12:    rgb:1b/85/d6
+*color13:    rgb:ad/73/ba
+*color14:    rgb:33/8e/aa
+*color15:    rgb:f4/f4/f4
+
+! black and dark grey
+!*VT100*color0:     rgb:30/34/30
+!*VT100*color8:     rgb:cd/b5/cd
+
+! dark red and red
+!*VT100*color1:     rgb:bf/79/79
+!*VT100*color9:     rgb:f4/a4/5f
+
+! dark green and green
+!*VT100*color2:     rgb:97/b2/6b
+!*VT100*color10:    rgb:c5/f7/79
+
+! dark yellow and yellow
+!*VT100*color3:     rgb:cd/cd/c1
+!*VT100*color11:    rgb:ff/ff/ef
+
+! dark blue and blue
+!*VT100*color4:     rgb:86/a2/be
+!*VT100*color12:    rgb:98/af/d9
+
+! dark mangenta and mangenta
+!*VT100*color5:     rgb:d9/b7/98
+!*VT100*color13:    rgb:d7/d9/98
+
+! dark cyan and cyan
+!*VT100*color6:     rgb:a1/b5/cd
+!*VT100*color14:    rgb:a1/b5/cd
+
+! light grey and white
+!*VT100*color7:     rgb:ff/ff/ff
+!*VT100*color15:    rgb:de/de/de

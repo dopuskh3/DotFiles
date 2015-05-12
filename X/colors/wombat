@@ -1,0 +1,27 @@
+!! Wombat Colors
+*foreground:foregroundrgb:ff/ff/ff
+*background:backgroundrgb:16/16/16
+!black
+*color0:color0rgb:16/16/16
+*color8:color8rgb:85/7B/6F
+!red
+*color1:color1rgb:e5/78/6d
+*color9:color9rgb:9d/2a/3a
+!green
+*color2:color2rgb:ca/e6/82
+*color10:color10rgb:8b/be/34
+!brown/yellow
+*color3:color3rgb:ff/e1/61
+*color11:color11rgb:ff/c4/42
+!blue
+*color4:color4rgb:52/83/d7
+*color12:color12rgb:3b/5d/9a
+!magenta
+*color5:color5rgb:b6/98/d9
+*color13:color13rgb:a5/7a/c4
+!cyan
+*color6:color6rgb:a8/c6/f2
+*color14:color14rgb:5d/a7/e1
+!white
+*color7:color7rgb:f6/f3/e8
+*color15:color15rgb:d3/d7/cf

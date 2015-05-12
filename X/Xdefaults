@@ -14,10 +14,10 @@ Xft.hintstyle: hintslight
 ! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
 !-------------------------------------------------------------------------------
 
+
+URxvt*termName: rxvt-256color
 URxvt.depth: 32
 URxvt.geometry: 90x30
-URxvt.transparent: false
-URxvt.fading: 0
 ! URxvt.urgentOnBell: true
 ! URxvt.visualBell: true
 URxvt.loginShell: true
@@ -25,7 +25,7 @@ URxvt.internalBorder: 3
 URxvt.lineSpace: 0
 
 ! Fonts
-URxvt.allow_bold: false
+URxvt.allow_bold: true
 URxvt*font: xft:Droid Sans Mono:pixelsize=13
 URxvt*boldFont: xft:Droid Sans Mono:pixelsize=13:bold
 URxvt*iso15755: false
@@ -33,10 +33,6 @@ URxvt*iso14755_52: false
 
 ! Fix font space
 URxvt*letterSpace: 0
-
-! Scrollbar
-URxvt.scrollStyle: rxvt
-URxvt.scrollBar: false
 
 ! Perl extensions
 URxvt.perl-lib: /home/fvisconte/.urxvt/perl
@@ -54,31 +50,17 @@ URxvt.cursorUnderline: false
 ! Pointer
 URxvt.pointerBlank: true
 
-!black
-URxvt*color0:    #2e2f31
-URxvt*color8:    #46474a
-!red
-URxvt*color1:    #ba3259
-URxvt*color9:    #ba4e6d
-!green
-URxvt*color2:    #32ba50
-URxvt*color10:   #4eba66
-!yellow
-URxvt*color3:    #ba9432
-URxvt*color11:   #ba9c4e
-!blue
-URxvt*color4:    #3259bb
-URxvt*color12:   #4e6dba
-!magenta
-URxvt*color5:    #ba329d
-URxvt*color13:   #ba4ea3
-!cyan
-URxvt*color6:    #329dba
-URxvt*color14:   #4ea3ba
-!white
-URxvt*color7:    #bdc4cb
-URxvt*color15:   #d5dee5
-URxvt*background: #2e2f31
-URxvt*foreground: #FFFFFF
+! Color schemes
+#include ".config/Xcolors/wombat256"
+ 
+URxvt.transparent: true
+URxvt.shading:     10
+URxvt.fading:      40
+
+URxvt.scrollBar:         false
+URxvt.scrollTtyOutput:   false
+URxvt.scrollWithBuffer:  true
+URxvt.scrollTtyKeypress: true
+
 URxvt.saveLines: 1000000
 

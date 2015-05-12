@@ -37,6 +37,7 @@ installlink fonts/fonts.conf .fonts.conf
 installlink terminator/config .config/terminator/config
 installlink ctags/ctags .ctags
 installlink scripts/spotify-command bin/spotify-command
+installlink X/colors .config/Xcolors
 
 for install_file in */install.sh; do
   chmod +x $install_file
