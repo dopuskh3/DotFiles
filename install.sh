@@ -1,48 +1,40 @@
 #!/bin/bash
-
-function installlink(){
-  if [ ! -d `dirname ~/$2` ]; then
-    mkdir -p `dirname ~/$2`
-  fi
-  [ -e ~/$2 -a -L ~/$2 ] && rm ~/$2
-  [ -e ~/$2 ] && (echo "Backup existing $2";  mv ~/$2 ~/$2-$(date +"%Y%m%d%H%M%S").bak)
-  echo "Installing $1 to $2"
-  ln -sf $(readlink -f $1) ~/$2
-
-}
+dotdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source ${dotdir}/dotlib.bash
 
 git submodule update --init --recursive
 
-installlink zsh/zshrc .zshrc
-installlink zsh/zsh   .zsh
-installlink screen/screenrc .screenrc
-installlink vim/vim .vim
-installlink vim/vimrc .vimrc
-installlink vim/vim .nvim
-installlink vim/vimrc .nvimrc
-installlink pylint/pylintrc .pylintrc
-installlink python/pythonrc .pythonrc
-installlink awesome .config/awesome
-installlink X/Xsession .Xsession
-installlink X/Xsession .xinitrc
-installlink X/Xdefaults .Xdefaults
-installlink bash/bashrc .bashrc
-installlink tmux/tmux.conf .tmux.conf
-installlink tmux/tmuxinator .tmuxinator
-installlink git/gitconfig .gitconfig
-installlink git .git
-installlink git/git-template.txt .git-template.txt
-installlink fonts/ .fonts
-installlink fonts/fonts.conf .fonts.conf
-installlink terminator/config .config/terminator/config
-installlink ctags/ctags .ctags
-installlink scripts/spotify-command bin/spotify-command
-installlink X/colors .config/Xcolors
+dot-install zsh/zshrc .zshrc
+dot-install zsh/zsh   .zsh
+dot-install screen/screenrc .screenrc
+dot-install vim/vim .vim
+dot-install vim/vimrc .vimrc
+dot-install vim/vim .nvim
+dot-install vim/vimrc .nvimrc
+dot-install pylint/pylintrc .pylintrc
+dot-install python/pythonrc .pythonrc
+dot-install awesome .config/awesome
+dot-install X/Xsession .Xsession
+dot-install X/Xsession .xinitrc
+dot-install X/Xdefaults .Xdefaults
+dot-install bash/bashrc .bashrc
+dot-install tmux/tmux.conf .tmux.conf
+dot-install tmux/tmuxinator .tmuxinator
+dot-install git/gitconfig .gitconfig
+dot-install git .git
+dot-install git/git-template.txt .git-template.txt
+dot-install fonts/ .fonts
+dot-install fonts/fonts.conf .fonts.conf
+dot-install terminator/config .config/terminator/config
+dot-install ctags/ctags .ctags
+dot-install scripts/spotify-command bin/spotify-command
+dot-install X/colors .config/Xcolors
 
-for install_file in */install.sh; do
-  chmod +x $install_file
-  if [ -x $install_file ]; then
-    echo "Running $install_file."
-    source $install_file
-  fi
-done
+if [ -d ${dir}/urxvt-font-size ]; then
+  pushd urxvt-font-size
+  git fetch --all
+  git reset --hard origin/master
+  popd
+else
+  git clone https://github.com/majutsushi/urxvt-font-size
+fi
