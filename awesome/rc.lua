@@ -57,7 +57,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 commands = {
-  lock = "light-locker-command --lock",
+  lock = "slimlock",
   ide = "/home/f.visconte/.local/idea/bin/idea.sh",
   terminal = "x-terminal-emulator",
   browser = "x-www-browser",
@@ -447,8 +447,8 @@ clientkeys = awful.util.table.join(
 
   clientbuttons = awful.util.table.join(
   awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-  awful.button({ "Control" }, 1, awful.mouse.client.move),
-  awful.button({ "Control" }, 3, awful.mouse.client.resize))
+  awful.button({ appactionkey }, 1, awful.mouse.client.move),
+  awful.button({ appactionkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)

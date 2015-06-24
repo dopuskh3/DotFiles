@@ -2,7 +2,9 @@
 #
 #
 local args
-args=("${(@f)$(git log --format="%h:%s" origin/master..HEAD)}")
+local remote_tracking
+remote_tracking=$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
+args=("${(@f)$(git log --format="%h:%s" ${remote_tracking}..HEAD)}")
 _arguments -C '*:command:->command'
 _describe -t commits 'commit' args
 return 0

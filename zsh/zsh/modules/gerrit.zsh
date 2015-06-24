@@ -1,19 +1,24 @@
 GERRIT_SERVER='gerrit'
 GERRIT_STANDARD_BRANCH='origin'
 
+function gerrit_remote_tracking () {
+  git rev-parse --abbrev-ref --symbolic-full-name @{u}
+}
+
 function review () {
   local tmplog=`mktemp`
-
+  local remote_tracking=$(gerrit_remote_tracking)
+  local remote_branch=$(echo ${remote_tracking} | cut -d'/' -f2-)
   if [ "$1" = "-a" ]; then
     zlog "Pushing all reviews:"
-    git --no-pager log --format='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' gerrit/master..HEAD
-    git push origin HEAD:refs/publish/master > $tmplog 2>&1
+    git --no-pager log --format='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' ${remote_tracking}..HEAD
+    git push origin HEAD:refs/publish/${remote_branch} > $tmplog 2>&1
     ret=$?
   elif [ $# -gt 0 ]; then
     for i in $*; do
       zlog "Pushing $i:"
       zlog "  `git log -1 --format="%s" $i`"
-      git push origin $i\:refs/publish/master > $tmplog 2>&1
+      git push origin $i\:refs/publish/${remote_branch} > $tmplog 2>&1
       ret=$?
     done
   else
@@ -30,11 +35,9 @@ function review () {
   return $ret
 }
 
-
-
 function lsr () {
   for branch in `git branch | sed 's/*//'`; do
-    l=`git log --pretty=oneline --abbrev-commit origin/master..$branch`
+    l=`git log --pretty=oneline --abbrev-commit $(gerrit_remote_tracking)..$branch`
     if [ ${#l} -eq 0 ]; then
       continue;
     fi;
@@ -78,4 +81,3 @@ alias dpush="git review --draft"
 alias rlist="git review --list"
 alias rpull="git review --download"
 alias rpick="git review --cherrypick"
-
