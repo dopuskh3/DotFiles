@@ -30,7 +30,7 @@ dot-install ctags/ctags .ctags
 dot-install scripts/spotify-command bin/spotify-command
 dot-install X/colors .config/Xcolors
 
-if [ -d ${dir}/urxvt-font-size ]; then
+if [ -d ${dotdir}/urxvt-font-size ]; then
   pushd urxvt-font-size
   git fetch --all
   git reset --hard origin/master

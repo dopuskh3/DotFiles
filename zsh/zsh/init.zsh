@@ -101,6 +101,7 @@ export LSCOLORS='cxgxhxhxbxhxhxbabacaca'
 if [ "$TERM" != "screen" ]; then
   tmux-list
 fi
+TERM=xterm
 
 
 

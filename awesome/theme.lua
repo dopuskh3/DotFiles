@@ -8,7 +8,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "awsetbg " .. os.getenv("HOME") .. ".config/awesome/wallpaper.png" }
+theme.wallpaper_cmd = { "feh --bg-fill " .. os.getenv("HOME") .. ".config/awesome/wallpaper.jpg" }
 -- }}}
 
 -- {{{ Styles
