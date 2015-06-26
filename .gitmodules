@@ -4,3 +4,6 @@
 [submodule "zsh/third-party/antigen"]
 	path = zsh/third-party/antigen
 	url = git@github.com:zsh-users/antigen.git
+[submodule "awesome/blingbling"]
+	path = awesome/blingbling
+	url = https://github.com/cedlemo/blingbling

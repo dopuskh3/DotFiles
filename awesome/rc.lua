@@ -2,6 +2,8 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local wibox = require("wibox")
+local utils = require("utils")
+local blingbling = require("blingbling")
 
 awful.autofocus = require("awful.autofocus")
 awful.rules = require("awful.rules")
@@ -61,7 +63,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 -- This is used later as the default terminal and editor to run.
 commands = {
   lock = "slimlock",
-  ide = "/home/f.visconte/.local/idea/bin/idea.sh",
+  ide = utils.HOME_DIR .. "/.local/idea/bin/idea.sh",
   terminal = "x-terminal-emulator",
   browser = "x-www-browser",
   filebrowser = "nautilus",
@@ -205,29 +207,35 @@ mytasklist.buttons = awful.util.table.join(
 )
 
 for s = 1, screen.count() do
-  -- CPU Usage 
-  -- Initialize widget
-  cpuwidget = awful.widget.graph()
-  -- -- Graph properties
-  cpuwidget:set_width(50)
-  cpuwidget:set_background_color("#494B4F")
-  cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 0, 20 }, stops = { { 0, "#ff0000" }, { 0.5, "#00ff00" }, { 1, "#0000ff" } }})
-  -- -- Register widget
-  vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
-  -- Initialize widget
-  memwidget = awful.widget.graph()
-  -- -- Graph properties
-  memwidget:set_width(50)
-  memwidget:set_background_color("#494B4F")
-  memwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 0, 20 }, stops = { { 0, "#ff0000" }, { 0.5, "#00ff00" }, { 1, "#0000ff" } }})
+    
+  -- Widget : CPU
+  cpu_graph = blingbling.line_graph({
+    height = 25,
+    width = 200,
+    show_text = true,
+    label = "Load: $percent %",
+    rounded_size = 0,
+    graph_background_color = "#00000033"
+  })
 
-  -- Battery widget
-  -- batwidget = awful.widget.text()
-  --vicious.register(batwidget, vicious.widgets.bat, "$1 $2 $3")
+  blingbling.popups.htop(cpu_graph,
+  { title_color = beautiful.notify_font,
+    user_color = beautiful.notify_fg,
+    root_color = beautiful.notify_bg,
+    terminal = "urxvt"})
+  vicious.register(cpu_graph, vicious.widgets.cpu, "$1", 2)
 
-  -- -- Register widget
-  vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
-  --
+  -- Widget : Memory
+  mem_graph = blingbling.line_graph({
+    height = 25,
+    width = 200,
+    show_text = true,
+    label = "Mem: $percent %",
+    rounded_size = 0,
+    graph_background_color = "#00000033"
+  })
+  vicious.register(mem_graph, vicious.widgets.mem, "$1", 2)
+
   -- Create a promptbox for each screen
   -- ######## Line too long (92 chars) ######## :
   mypromptbox[s] = awful.widget.prompt()
@@ -255,9 +263,8 @@ for s = 1, screen.count() do
   left_layout:add(mypromptbox[s])
 
   local right_layout = wibox.layout.fixed.horizontal()
-  right_layout:add(cpuwidget)
-  right_layout:add(memwidget)
-  right_layout:add(batt)
+  right_layout:add(cpu_graph)
+  right_layout:add(mem_graph)
   right_layout:add(spacer)
   right_layout:add(mytextclock)
   if s == 1 then
