@@ -4,6 +4,7 @@ local naughty = require("naughty")
 local wibox = require("wibox")
 local utils = require("utils")
 local blingbling = require("blingbling")
+local battery = require("battery")
 
 awful.autofocus = require("awful.autofocus")
 awful.rules = require("awful.rules")
@@ -151,8 +152,6 @@ spacer       = wibox.widget.textbox()
 spacer:set_text(' | ')
 
 --Battery Widget
-batt = wibox.widget.textbox()
-vicious.register(batt, vicious.widgets.bat, "Batt: $2% Rem: $3", 61, "BAT1")
 
 
 mylauncher = awful.widget.launcher({
@@ -236,6 +235,14 @@ for s = 1, screen.count() do
   })
   vicious.register(mem_graph, vicious.widgets.mem, "$1", 2)
 
+  batterywidget = wibox.widget.textbox()
+  batterywidget_timer = timer({timeout = 1})
+  batterywidget_timer:connect_signal("timeout", function()
+    batterywidget:set_text(batteryInfo("BAT0"))
+  end)
+  batterywidget_timer:start()
+  batterywidget:set_text(batteryInfo("BAT0"))
+
   -- Create a promptbox for each screen
   -- ######## Line too long (92 chars) ######## :
   mypromptbox[s] = awful.widget.prompt()
@@ -265,6 +272,7 @@ for s = 1, screen.count() do
   local right_layout = wibox.layout.fixed.horizontal()
   right_layout:add(cpu_graph)
   right_layout:add(mem_graph)
+  right_layout:add(batterywidget)
   right_layout:add(spacer)
   right_layout:add(mytextclock)
   if s == 1 then
