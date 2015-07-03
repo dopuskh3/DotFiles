@@ -1,0 +1,1 @@
+alias dsh="dsh -M"

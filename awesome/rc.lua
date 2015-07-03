@@ -11,6 +11,7 @@ awful.rules = require("awful.rules")
 awful.util = require("awful.util")
 awful.widget = require("awful.widget")
 vicious = require("vicious")
+volume = require("volume")
 
 -- {{{ Helper functions:
 function run_command_cb (command)
@@ -58,12 +59,16 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
+-- beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
+
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/copland/theme.lua")
+
+
 
 
 -- This is used later as the default terminal and editor to run.
 commands = {
-  lock = "slimlock",
+  lock = "i3lock",
   ide = utils.HOME_DIR .. "/.local/idea/bin/idea.sh",
   terminal = "x-terminal-emulator",
   browser = "x-www-browser",
@@ -72,16 +77,12 @@ commands = {
   player_next = "spotify-command next",
   player_prev = "spotify-command previous",
   player_pause = "spotify-command playpause",
-  volume_up = "amixer -D pulse sset Master 5%+",
-  volume_down = "amixer -D pulse sset Master 5%-",
-  wallpaper = "awsetbg " .. os.getenv("HOME") .. "/.config/awesome/wallpaper.jpg" 
+  volume_up = "amixer sset Master 5%+",
+  volume_down = "amixer sset Master 5%-",
+  wallpaper = "feh --bg-fill " .. os.getenv("HOME") .. "/.config/awesome/wallpaper.jpg" 
 }
 
 startup_commands = {
-  "light-locker",
-  "unity-settings-daemon",
-  "nm-applet",
-  "gnome-sound-applet",
   commands["wallpaper"],
 }
 
@@ -273,6 +274,7 @@ for s = 1, screen.count() do
   right_layout:add(cpu_graph)
   right_layout:add(mem_graph)
   right_layout:add(batterywidget)
+  right_layout:add(volume_widget)
   right_layout:add(spacer)
   right_layout:add(mytextclock)
   if s == 1 then
@@ -354,6 +356,9 @@ root.buttons(awful.util.table.join(
   
   -- Standard program
   awful.key({ modkey, }, "Return", run_command_cb(commands["terminal"])),
+  awful.key({}, "XF86MonBrightnessUp", run_command_cb("xbacklight -inc 5")),
+  awful.key({}, "XF86MonBrightnessDown", run_command_cb("xbacklight -dec 5")),
+
   awful.key({ "Control", modkey, "Mod1" }, "Right", run_command_cb(commands["player_next"])),
   awful.key({ "Control", modkey, "Mod1" }, "Left", run_command_cb(commands["player_prev"])),
   awful.key({ "Control", modkey, "Mod1" }, "Up", run_command_cb(commands["volume_up"])),

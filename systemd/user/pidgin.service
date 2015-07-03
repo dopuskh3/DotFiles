@@ -1,0 +1,9 @@
+[Unit]
+Description=Pidgin
+
+[Service]
+ExecStart=/usr/bin/pidgin
+Restart=on-abort
+
+[Install]
+WantedBy=default.target

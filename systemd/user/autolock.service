@@ -1,0 +1,8 @@
+[Unit]
+Description=Lock screen automatically
+
+[Service]
+ExecStart=/usr/bin/xautolock -time 3 -corners ---- -locker 'i3lock -t -i /usr/.config/wallpapers'
+
+[Install]
+WantedBy=default.target
