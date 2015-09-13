@@ -1,10 +1,10 @@
 [Unit]
-Description=Pidgin
+Description=Hipchat
 After=default.target
 Requires=default.target
 
 [Service]
-ExecStart=/usr/bin/pidgin
+ExecStart=/usr/bin/hipchat
 Environment=DISPLAY=:0
 Restart=on-abort
 

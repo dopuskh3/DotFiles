@@ -1,0 +1,7 @@
+[Unit]
+
+Description=User session stuffs
+Wants=xorg.target
+Requires=dbus.socket
+AllowIsolate=true
+

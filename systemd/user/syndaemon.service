@@ -1,12 +1,12 @@
 [Unit]
-Description=Pidgin
+Description=Synaptic daemon
 After=default.target
 Requires=default.target
 
 [Service]
-ExecStart=/usr/bin/pidgin
+ExecStart=/usr/bin/syndaemon -KRt -i 1.0
 Environment=DISPLAY=:0
-Restart=on-abort
+Restart=always
 
 [Install]
 WantedBy=desktop-session.target

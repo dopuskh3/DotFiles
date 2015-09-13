@@ -61,14 +61,14 @@ end
 -- Themes define colours, icons, and wallpapers
 -- beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
-beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/copland/theme.lua")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/rbown/theme.lua")
 
 
 
 
 -- This is used later as the default terminal and editor to run.
 commands = {
-  lock = "i3lock",
+  lock = "slock",
   ide = utils.HOME_DIR .. "/.local/idea/bin/idea.sh",
   terminal = "x-terminal-emulator",
   browser = "x-www-browser",
@@ -79,11 +79,10 @@ commands = {
   player_pause = "spotify-command playpause",
   volume_up = "amixer sset Master 5%+",
   volume_down = "amixer sset Master 5%-",
-  wallpaper = "feh --bg-fill " .. os.getenv("HOME") .. "/.config/awesome/wallpaper.jpg" 
 }
 
 startup_commands = {
-  commands["wallpaper"],
+  "systemctl --user start desktop-session.target",
 }
 
 -- Default modkey.

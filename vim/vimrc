@@ -196,7 +196,7 @@ runtime ftplugin/man.vim
 set t_Co=256
 set bg=dark
 if has("gui_running")
-  set guioptions=mr
+  set guioptions=
   set guifont=Inconsolata\ 12
 endif
 colorscheme Tomorrow-Night-Eighties

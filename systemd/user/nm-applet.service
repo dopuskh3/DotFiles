@@ -6,4 +6,4 @@ ExecStart=/usr/bin/nm-applet
 Restart=on-abort
 
 [Install]
-WantedBy=default.target
+WantedBy=desktop-session.target
