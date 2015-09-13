@@ -1,8 +1,10 @@
 [Unit]
 Description=Lock screen automatically
+After=default.target
+Requisite=default.target
 
 [Service]
-ExecStart=/usr/bin/xautolock -time 3 -corners ---- -locker 'i3lock -t -i /usr/.config/wallpapers'
+ExecStart=/usr/bin/xautolock -time 3 -corners ---- -locker 'slock'
 
 [Install]
-WantedBy=default.target
+WantedBy=desktop-session.target

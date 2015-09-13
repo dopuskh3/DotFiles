@@ -1,0 +1,10 @@
+[Unit]
+Description=Rotating background command
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=/bin/bash -c 'feh --bg-fill --randomize ${HOME}/.config/wallpapers/*'
+
+[Install]
+WantedBy=ustuff.target
