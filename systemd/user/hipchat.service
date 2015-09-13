@@ -5,6 +5,7 @@ Description=Hipchat
 ExecStart=/usr/bin/hipchat
 Environment=DISPLAY=:0
 Restart=on-abort
+After=desktop-session.target
 
 [Install]
 WantedBy=desktop-session.target
