@@ -1,7 +1,5 @@
 [Unit]
 Description=Lock screen automatically
-After=default.target
-Requisite=default.target
 
 [Service]
 ExecStart=/usr/bin/xautolock -time 3 -corners ---- -locker 'slock'

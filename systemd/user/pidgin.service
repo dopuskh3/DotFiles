@@ -1,7 +1,5 @@
 [Unit]
 Description=Pidgin
-After=default.target
-Requires=default.target
 
 [Service]
 ExecStart=/usr/bin/pidgin

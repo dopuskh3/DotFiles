@@ -1,7 +1,5 @@
 [Unit]
 Description=Synaptic daemon
-After=default.target
-Requires=default.target
 
 [Service]
 ExecStart=/usr/bin/syndaemon -KRt -i 1.0
