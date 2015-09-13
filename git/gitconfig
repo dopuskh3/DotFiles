@@ -40,7 +40,7 @@
 [core]
   whitespace = trailing-space,space-before-tab
   autocrlf = input
-  editor = vi
+	editor = /usr/bin/vim
 
 [commit]
   template = ~/.git-template.txt
