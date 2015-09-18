@@ -30,6 +30,7 @@ dot-install ctags/ctags .ctags
 dot-install scripts/spotify-command bin/spotify-command
 dot-install X/colors .config/Xcolors
 dot-install systemd/user .config/systemd/user
+dot-install yaourt/yaourtrc .yaourtrc
 
 if [ -d ${dotdir}/urxvt-font-size ]; then
   pushd urxvt-font-size
