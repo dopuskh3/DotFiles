@@ -11,7 +11,7 @@ awful.rules = require("awful.rules")
 awful.util = require("awful.util")
 awful.widget = require("awful.widget")
 vicious = require("vicious")
-volume = require("volume")
+-- volume = require("volume")
 
 -- {{{ Helper functions:
 function run_command_cb (command)
@@ -273,7 +273,6 @@ for s = 1, screen.count() do
   right_layout:add(cpu_graph)
   right_layout:add(mem_graph)
   right_layout:add(batterywidget)
-  right_layout:add(volume_widget)
   right_layout:add(spacer)
   right_layout:add(mytextclock)
   if s == 1 then

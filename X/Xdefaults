@@ -2,11 +2,19 @@
 !-------------------------------------------------------------------------------
 ! Xft settings
 !-------------------------------------------------------------------------------
-Xft.dpi: 96
+!Xft.dpi: 96
+!Xft.antialias: true
+!Xft.rgba: rgb
+!Xft.hinting: true
+!Xft.hintstyle: hintslight
+
+
 Xft.antialias: true
-Xft.rgba: rgb
-Xft.hinting: true
-Xft.hintstyle: hintslight
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.hintstyle: hintfull
+Xft.dpi:       160
+
 
 !-------------------------------------------------------------------------------
 ! URxvt settings
@@ -21,18 +29,18 @@ URxvt.geometry: 90x30
 ! URxvt.urgentOnBell: true
 ! URxvt.visualBell: true
 URxvt.loginShell: true
-URxvt.internalBorder: 3
+URxvt.internalBorder: 0
 URxvt.lineSpace: 0
 
 ! Fonts
 URxvt.allow_bold: true
-URxvt*font: xft:Droid Sans Mono:pixelsize=13
-URxvt*boldFont: xft:Droid Sans Mono:pixelsize=13:bold
+URxvt*font: xft:DejaVu Sans Mono:size=13
+URxvt*boldFont: xft:DejaVu Sans Mono:size=13:bold
 URxvt*iso15755: false
 URxvt*iso14755_52: false
 
 ! Fix font space
-URxvt*letterSpace: 0
+! URxvt*letterSpace: 0
 
 ! Perl extensions
 URxvt.perl-ext-common: default, selection-to-clipboard
@@ -49,16 +57,14 @@ URxvt.cursorUnderline: false
 URxvt.pointerBlank: true
 
 ! Color schemes
-#include ".config/Xcolors/wombat256"
+#include ".config/Xcolors/custom"
  
 URxvt.transparent: true
 URxvt.shading:     10
 URxvt.fading:      40
-
 URxvt.scrollBar:         false
 URxvt.scrollTtyOutput:   false
 URxvt.scrollWithBuffer:  true
 URxvt.scrollTtyKeypress: true
-
 URxvt.saveLines: 1000000
 

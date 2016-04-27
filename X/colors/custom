@@ -1,0 +1,30 @@
+! Colors ---------------------------------
+! Black
+URxvt*color0 : #000000
+URxvt*color8 : #2d2d2d
+! Red
+URxvt*color1 : #d24836
+URxvt*color9 : #ff5742
+! Green
+URxvt*color2 : #3c9200
+URxvt*color10: #6ab915
+! Yellow
+URxvt*color3 : #eeb211
+URxvt*color11: #ffba00
+! Blue
+URxvt*color4 : #005ef7
+URxvt*color12: #4a8cf7
+! Magenta
+URxvt*color5 : #7f39aa
+URxvt*color13: #bf57ff
+! Cyan
+URxvt*color6 : #00ccbb
+URxvt*color14: #3cf0f7
+! White
+URxvt*color7 : #f1f1f1
+URxvt*color15: #ffffff
+! ------
+URxvt*background: #2d2d2d
+URxvt*foreground: #f1f1f1
+
+

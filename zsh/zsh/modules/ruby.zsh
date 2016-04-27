@@ -1,1 +1,1 @@
-alias be="bundle exec"
+alias be="USER=f.visconte bundle exec"

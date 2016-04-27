@@ -12,14 +12,14 @@ theme.wallpaper_cmd = { "feh --bg-fill " .. os.getenv("HOME") .. ".config/awesom
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "sans 12"
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
 theme.fg_focus  = "#F0DFAF"
 theme.fg_urgent = "#CC9393"
 theme.bg_normal = "#3F3F3F"
-theme.bg_focus  = "#1E2320"
+theme.bg_focus  = "#D3D3D3"
 theme.bg_urgent = "#3F3F3F"
 -- }}}
 
