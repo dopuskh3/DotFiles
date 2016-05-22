@@ -13,7 +13,7 @@ Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
 Xft.hintstyle: hintfull
-Xft.dpi:       160
+Xft.dpi:       90
 
 
 !-------------------------------------------------------------------------------
@@ -34,8 +34,8 @@ URxvt.lineSpace: 0
 
 ! Fonts
 URxvt.allow_bold: true
-URxvt*font: xft:DejaVu Sans Mono:size=13
-URxvt*boldFont: xft:DejaVu Sans Mono:size=13:bold
+URxvt*font: xft:DejaVu Sans Mono:size=11
+URxvt*boldFont: xft:mononoki:size=11:bold
 URxvt*iso15755: false
 URxvt*iso14755_52: false
 
@@ -68,3 +68,7 @@ URxvt.scrollWithBuffer:  true
 URxvt.scrollTtyKeypress: true
 URxvt.saveLines: 1000000
 
+URxvt.keysym.Control-Up:   \033[1;5A
+URxvt.keysym.Control-Down:    \033[1;5B
+URxvt.keysym.Control-Left:    \033[1;5D
+URxvt.keysym.Control-Right:    \033[1;5C

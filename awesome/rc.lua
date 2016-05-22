@@ -11,7 +11,6 @@ awful.rules = require("awful.rules")
 awful.util = require("awful.util")
 awful.widget = require("awful.widget")
 vicious = require("vicious")
--- volume = require("volume")
 
 -- {{{ Helper functions:
 function run_command_cb (command)
@@ -32,7 +31,6 @@ function prevTag (t)
       awful.tag.viewprev(screen[s].index)
     end
 end
-
 
 -- }}}
 
@@ -131,7 +129,7 @@ end
 tags = {}
 for s = 1, screen.count() do
   -- Each screen has its own tag table.
-  tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+  tags[s] = awful.tag({ "[1]com", "[2]interupt", "[3]dev1", "[4]dev2", "[5]music", "[6]misc"}, s, layouts[1])
 end
 -- }}}
 
