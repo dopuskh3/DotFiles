@@ -1,0 +1,5 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=spotify
+Exec=/usr/bin/spotify --force-device-scale-factor=1.5
+Type=Application
