@@ -83,6 +83,7 @@ commands = {
 
 startup_commands = {
   "systemctl --user start desktop-session.target",
+  "dex -ae Awesome",
 }
 
 -- Default modkey.

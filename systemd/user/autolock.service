@@ -1,8 +1,0 @@
-[Unit]
-Description=Lock screen automatically
-
-[Service]
-ExecStart=/usr/bin/xautolock -time 3 -corners ---- -locker 'slock'
-
-[Install]
-WantedBy=desktop-session.target

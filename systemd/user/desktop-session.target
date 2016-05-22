@@ -1,7 +1,0 @@
-[Unit]
-
-Description=User session stuffs
-Requires=dbus.socket
-AllowIsolate=true
-
-
