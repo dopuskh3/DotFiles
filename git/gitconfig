@@ -59,3 +59,9 @@
   path = ~/DotFiles/git/git-extras.conf
 [push]
 	default = matching
+[gitreview]
+	username = f.visconte
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = alse

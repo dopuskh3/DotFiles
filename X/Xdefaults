@@ -34,7 +34,7 @@ URxvt.lineSpace: 0
 
 ! Fonts
 URxvt.allow_bold: true
-URxvt*font: xft:DejaVu Sans Mono:size=11
+URxvt*font: xft:mononoki:size=11
 URxvt*boldFont: xft:mononoki:size=11:bold
 URxvt*iso15755: false
 URxvt*iso14755_52: false
