@@ -1,5 +1,10 @@
 #!/bin/bash
 export PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
-dex -a -e Awesome >>  $HOME/.Xsession.log 2>&1
+export SCREENLAYOUT_SCRIPT=${HOME}/.screenlayout/layout.sh
+
+dex -a -e i3 >>  $HOME/.Xsession.log 2>&1
+if [ -e ${SCREENLAYOUT_SCRIPT} ]; then
+  bash ${SCREENLAYOUT_SCRIPT}
+fi
 xrdb -load ~/.Xresources >> $HOME/.Xsession.log 2>&1
-exec awesome >> $HOME/.Xsession.log 2>&1
+exec i3 >> $HOME/.Xsession.log 2>&1
