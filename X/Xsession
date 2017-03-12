@@ -2,9 +2,12 @@
 export PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 export SCREENLAYOUT_SCRIPT=${HOME}/.screenlayout/layout.sh
 
-dex -a -e i3 >>  $HOME/.Xsession.log 2>&1
+# dex -a -e i3 >>  $HOME/.Xsession.log 2>&1
+eval $(/usr/bin/gnome-keyring-daemon --replace --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
 if [ -e ${SCREENLAYOUT_SCRIPT} ]; then
   bash ${SCREENLAYOUT_SCRIPT}
 fi
 xrdb -load ~/.Xresources >> $HOME/.Xsession.log 2>&1
+xrdb -merge ~/.Xdefaults >> $HOME/.Xsession.log 2>&1
 exec i3 >> $HOME/.Xsession.log 2>&1

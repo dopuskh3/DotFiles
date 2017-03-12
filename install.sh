@@ -32,6 +32,8 @@ dot-install scripts/spotify-command bin/spotify-command
 dot-install X/colors .config/Xcolors
 dot-install systemd/user .config/systemd/user
 dot-install yaourt/yaourtrc .yaourtrc
+dot-install i3 .config/i3
+dot-install dunst .config/dunst
 
 if [ -d ${dotdir}/urxvt-font-size ]; then
   pushd urxvt-font-size

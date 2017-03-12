@@ -1,5 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Name=autolock
-Exec=/usr/bin/xautolock -time 3 -corners ---- -locker 'slock
-Type=Application

@@ -43,7 +43,7 @@
 	editor = /usr/bin/vim
 
 [commit]
-  template = ~/.git-template.txt
+	template = /home/fv/.git-template.txt
 
 [giggle]
   main-window-maximized = false
