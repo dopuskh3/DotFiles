@@ -13,7 +13,7 @@ Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
 Xft.hintstyle: hintfull
-Xft.dpi:       180
+Xft.dpi:       80
 
 
 !-------------------------------------------------------------------------------
@@ -92,5 +92,5 @@ rofi.color-urgent:                   argb:00000000, #ffa0a0, argb:00000000, #ffa
 rofi.color-active:                   argb:00000000, #a0ffa0, argb:00000000, #a0ffa0,#0060a0
 ! Color scheme window
 rofi.color-window:                   argb:ee0060a0, #00b0ef,#00b0ef
-rofi.font:             sans-serif bold 32
+rofi.font:             sans-serif bold 12
 
