@@ -1,7 +1,20 @@
 #!/bin/bash
 set -x
 HOME=/home/fv
+logfile=$HOME/.Xsession.log
+
+exec 1<&-
+exec 2<&-
+exec 1<> $logfile
+exec 2>&1
+
 hostname=$(hostname)
+xresources=$HOME/.Xresources
+local_xresources=${xresources}.${hostname}
+
+function log() {
+  echo $*
+}
 
 export PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 export SCREENLAYOUT_SCRIPT=${HOME}/.screenlayout/layout-$(hostname).sh
@@ -11,20 +24,15 @@ eval $(/usr/bin/gnome-keyring-daemon --replace --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
 if [ -e ${SCREENLAYOUT_SCRIPT} ]; then
+  log "Loading screen layout script ${SCREENLAYOUT_SCRIPT}"
   bash ${SCREENLAYOUT_SCRIPT}
 fi
 
-if [ -e ${HOME}/.Xresources-${hostname} ]; then
-  xrdb -load ${HOME}/.Xresources-${hostname} >> $HOME/.Xsession.log 2>&1
-else
-  xrdb -load ${HOME}/.Xresources >> $HOME/.Xsession.log 2>&1
+log "Loading xresources ${xresources}"
+xrdb -load ${xresources}
+if [ -e ${local_xresources} ]; then
+  xrdb -merge ${local_xresources}
 fi
 
+exec i3
 
-if [ -e ${HOME}/.Xdefaults-${hostname} ]; then
-  xrdb -merge ${HOME}/.Xdefaults-${hostname} >> $HOME/.Xsession.log 2>&1
-else
-  xrdb -merge ${HOME}/.Xdefaults >> $HOME/.Xsession.log 2>&1
-fi
-
-exec i3 >> $HOME/.Xsession.log 2>&1
