@@ -50,6 +50,7 @@ floating_modifier $win
 
 # start a terminal
 bindsym $win+c exec sakura
+bindsym $win+$alt+n exec "gvim '+normal Go' +startinsert  /home/fv/Dropbox/NOTES.txt"
 # Start browser 
 bindsym $win+b exec x-www-browser
 

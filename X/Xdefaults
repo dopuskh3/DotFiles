@@ -83,14 +83,13 @@ rofi.sidebar-mode: true
 ! ROFI Color theme
 ! ------------------------------------------------------------------------------
 ! Use extended color scheme
-rofi.color-enabled:                  true
-! Color scheme for normal row
-rofi.color-normal:                   argb:00000000, #00b0ef, argb:00000000, #00b0ef,#0060a0
-! Color scheme for urgent row
-rofi.color-urgent:                   argb:00000000, #ffa0a0, argb:00000000, #ffa0a0,#0060a0
-! Color scheme for active row
-rofi.color-active:                   argb:00000000, #a0ffa0, argb:00000000, #a0ffa0,#0060a0
-! Color scheme window
-rofi.color-window:                   argb:ee0060a0, #00b0ef,#00b0ef
-rofi.font:             sans-serif bold 32
+!
+!
+
+rofi.color-enabled: true
+rofi.color-window: #273238, #273238, #1e2529
+rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
+rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
+rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844
+rofi.font: sans-serif bold 32
 
