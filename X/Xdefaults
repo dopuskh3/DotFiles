@@ -13,7 +13,7 @@ Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
 Xft.hintstyle: hintfull
-Xft.dpi:       180
+Xft.dpi:       80
 
 
 !-------------------------------------------------------------------------------
@@ -83,9 +83,6 @@ rofi.sidebar-mode: true
 ! ROFI Color theme
 ! ------------------------------------------------------------------------------
 ! Use extended color scheme
-!
-!
-
 rofi.color-enabled: true
 rofi.color-window: #273238, #273238, #1e2529
 rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff

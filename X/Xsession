@@ -1,5 +1,8 @@
 #!/bin/bash
 set -x
+HOME=/home/fv
+hostname=$(hostname)
+
 export PATH=${HOME}/bin:${HOME}/.local/bin:${PATH}
 export SCREENLAYOUT_SCRIPT=${HOME}/.screenlayout/layout-$(hostname).sh
 
@@ -11,6 +14,17 @@ if [ -e ${SCREENLAYOUT_SCRIPT} ]; then
   bash ${SCREENLAYOUT_SCRIPT}
 fi
 
-xrdb -load ~/.Xresources >> $HOME/.Xsession.log 2>&1
-xrdb -merge ~/.Xdefaults >> $HOME/.Xsession.log 2>&1
+if [ -e ${HOME}/.Xresources-${hostname} ]; then
+  xrdb -load ${HOME}/.Xresources-${hostname} >> $HOME/.Xsession.log 2>&1
+else
+  xrdb -load ${HOME}/.Xresources >> $HOME/.Xsession.log 2>&1
+fi
+
+
+if [ -e ${HOME}/.Xdefaults-${hostname} ]; then
+  xrdb -merge ${HOME}/.Xdefaults-${hostname} >> $HOME/.Xsession.log 2>&1
+else
+  xrdb -merge ${HOME}/.Xdefaults >> $HOME/.Xsession.log 2>&1
+fi
+
 exec i3 >> $HOME/.Xsession.log 2>&1
