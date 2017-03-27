@@ -31,7 +31,7 @@ fi
 log "Loading xresources ${xresources}"
 xrdb -load ${xresources}
 if [ -e ${local_xresources} ]; then
-  xrdb -merge ${local_xresources}
+  xrdb -override ${local_xresources}
 fi
 
 exec i3

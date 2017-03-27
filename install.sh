@@ -17,7 +17,8 @@ dot-install awesome .config/awesome
 dot-install X/Xsession .Xsession
 dot-install X/Xsession .xinitrc
 dot-install X/Xsession .xinitrc
-dot-install X/Xdefaults .Xdefaults
+dot-install X/Xresources .Xresources
+dot-install X/Xresources.fvws .Xresources.fvws
 dot-install bash/bashrc .bashrc
 dot-install tmux/tmux.conf .tmux.conf
 dot-install tmux/tmuxinator .tmuxinator
