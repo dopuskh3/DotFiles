@@ -49,7 +49,7 @@ bindsym $alt+Shift+Right move right
 floating_modifier $win
 
 # start a terminal
-bindsym $win+c exec sakura
+bindsym $win+c exec termite
 bindsym $win+$alt+n exec "gvim '+normal Go' +startinsert  /home/fv/Dropbox/NOTES.txt"
 # Start browser 
 bindsym $win+b exec x-www-browser
