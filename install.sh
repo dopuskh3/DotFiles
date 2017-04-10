@@ -36,6 +36,7 @@ dot-install yaourt/yaourtrc .yaourtrc
 dot-install i3 .config/i3
 dot-install dunst .config/dunst
 dot-install sakura .config/sakura
+dot-install termite/config .config/termite/config
 
 if [ -d ${dotdir}/urxvt-font-size ]; then
   pushd urxvt-font-size
