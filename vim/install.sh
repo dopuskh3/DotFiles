@@ -1,5 +1,5 @@
 #!/bin/bash
-VIM_DIR=$(readlink -f `dirname ${BASH_SOURCE}`)
+VIM_DIR=$HOME/DotFiles/vim
 
 function exfail () {
   echo $* 1>&2
