@@ -1,0 +1,208 @@
+"==========================================
+"
+" Francois Visconte <f.visconte@gmail.com>
+"
+"
+"
+"==========================================
+
+set autoindent                      " always set autoindenting on
+set backspace=indent,eol,start      " more powerful backspacing
+set backupdir=/tmp
+" set clipboard=autoselect            " clipboard
+set cmdheight=1                     " cmd line height
+set confirm                         " confirm before quitting unsaved
+set cursorline
+set encoding=utf-8
+set expandtab
+set exrc                            " Run local .vimrc files in the CWD
+set hidden                          " keep all file in memory
+set history=50                      " keep 50 lines of command line history
+set hlsearch                        " hilight search patern
+set ignorecase                      " ignore case when searching
+set incsearch                       " Incremental search
+set laststatus=2
+set matchpairs=(:),{:},[:],<:>
+set matchtime=2                     " 20ms matchtime
+set modeline
+set modelines=5
+set mouse=arc
+set nobackup                        " Don't keep a backup file
+set nocompatible                    " Use Vim defaults instead of 100% vi compatibility
+set nocp
+set nofoldenable                    " do not enable folding by default
+set report=0                        " allways report changes in file
+set ruler                           " show the cursor position all the time
+set scrolloff=8                     " scroll buffer 8 line before/after
+set shell=zsh                       " my shell
+set showbreak=>\ \ \
+set showcmd                         " Show (partial) command in status line.
+set showmatch                       " Show matching brackets.
+set smarttab
+set shiftwidth=2                    " shift width
+set softtabstop=2                   " soft tabs
+set statusline=%58(%-15t\ \ %Y%M\ \ #%2n\ \ %3v,%-3l\ of\ %L\ \ %5P%)
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+set tabstop=2
+set tags=./tags
+set textwidth=0                     " Don't wrap lines by default
+set title                           " change terminal title
+set viminfo='20,\"50                " read/write a .viminfo file, don't store more than
+set visualbell t_vb=""              " visual bell
+
+set whichwrap=b,s,h,l,<,>,[,]       " when moving my cursor, wrap in all cases (don't get stuck at end of line, etc)
+set wildmenu                        " show a list of file when completing
+set wildmode=longest:list,full      " make file completion like bash
+set wrap                            " wrap long lines
+
+
+syntax on                           " Syntax hilighting by default
+filetype off
+filetype plugin indent on
+
+" Enable Bundles 
+"
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+" Some bundles
+"
+Bundle "fholgado/minibufexpl.vim"
+Bundle 'scrooloose/nerdtree'
+Bundle "Shougo/vimproc.vim"
+Bundle "majutsushi/tagbar"
+Bundle 'Valloric/YouCompleteMe'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
+let python_highlight_all=1
+Plugin 'jistr/vim-nerdtree-tabs'
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Shougo/denite.nvim'
+
+
+
+" Bundle "dopuskh3/vim-git"
+
+" Bundle "derekwyatt/vim-scala"
+" Bundle "ryanss/vim-hackernews"
+
+" GO bundles
+" Bundle "Blackrush/vim-gocode"
+" Bundle "jnwhiteh/vim-golang"
+" Bundle "scrooloose/syntastic"
+" Bundle "dgryski/vim-godef"
+
+"Clojure bundles
+" Bundle 'guns/vim-clojure-static'
+
+
+" Tagbar configuration
+"
+nmap <F3> :TagbarToggle<CR>
+let g:tagbar_right=1
+
+" NERDTree configuration
+"
+let g:NERDTreeIgnore=['\.pyc$', '\~$']
+let g:NERDTreeWinPos='left'
+
+" Unite configuration
+"
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" let g:unite_source_file_rec_max_cache_files=10000
+
+
+" Supertab configuration
+"
+let g:SuperTabDefaultCompletionType = "context"
+
+
+" Some custom functions
+"
+command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
+
+
+
+function! RTrim()
+  let vw=winsaveview()
+  %s/\v\s+$//e
+  %s#\($\n\s*\)\+\%$##e
+  call winrestview(vw)
+  noh
+endfunction
+
+" Keyboard mapping
+"
+map ;e :QFix<CR>
+map ;t :NERDTreeToggle<CR>
+map <F2> :NERDTreeToggle<CR>
+nnoremap <C-p> :Unite -start-insert -buffer-name=files file_rec<CR>
+nnoremap <space>/ :Unite grep:.<CR>
+nnoremap <C-space> :Unite -quick-match buffer<CR>
+map ;q :bp<CR>
+map ;w :bn<CR>
+map ;v gg=G<CR>
+map ;n :set nu<CR>
+map ;b :make<CR>
+map ;u :set nonu<CR>
+map ;f :fold<cr>
+map ;c :e ~/.vimrc<CR>
+map ;s :sh<CR>
+map ;h :call MyPersonalHelp()<CR>
+map ;z :cp<CR>
+map ;x :cn<CR>
+map <F11> :call Insert_datetime()<CR>
+map ;fl :TMiniBufExplorer<CR>
+map <C-LeftMouse> <C-]>
+map <C-RightMouse> <C-T>
+
+let mapleader=";"
+let maplocalleader="_"
+
+
+" Filetype specific commands
+"
+filetype plugin on
+filetype plugin indent on
+
+
+if has("autocmd")
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent loadview
+  autocmd BufWritePre *.py,*.txt,*.hh,*h,*.hpp,*.c,*.cpp,*.pp,*.html,*.js,*.css,*.rb,*.groovy call RTrim()
+  autocmd Filetype gitcommit set textwidth=72
+  autocmd Filetype gitcommit set makeprg=python\ /home/f.visconte/scripts/git-validate-commit.py\ %
+  autocmd Filetype gitcommit set efm=%l:%c:%m
+  autocmd BufWritePost COMMIT_EDITMSG make
+endif " Has autocmd
+
+
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+" let us view mapages
+"
+runtime ftplugin/man.vim
+
+" GUI specific things
+"
+set t_Co=256
+set t_ut=
+set bg=dark
+if has("gui_running")
+  set guioptions=
+  set guifont=Inconsolata\ 12
+endif
+
