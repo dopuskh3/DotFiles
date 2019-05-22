@@ -4,6 +4,7 @@ import os
 import datetime
 import subprocess
 import shutil
+import copy
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -15,9 +16,17 @@ def homedir():
 def dotfiledir():
     return os.path.join(os.path.dirname(__file__), '..')
 
+def _environ():
+    env = copy.copy(os.environ)
+    env['DOT_FILES'] = dotfiledir()
+
 def sh(command):
     log.info("Running {}".format(command))
-    subprocess.check_call(command, shell=True)
+    subprocess.check_call(command, shell=True, env=_environ())
+
+def zsh(command):
+    log.info("Running zsh command: {}".format(command))
+    subprocess.check_call(['zsh', '-c', command], env=_environ())
 
 def rmr(directory):
     directory = os.path.normpath(directory)
