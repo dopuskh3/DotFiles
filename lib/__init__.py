@@ -11,6 +11,14 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 mkdirp = os.makedirs
 
+def cleanall():
+    value = os.environ.get('DOT_FILES_FLUSH', 'false').lower()
+    if value in ['1', 't', 'true', 'yes']:
+        log.info("Clean mode is set to True")
+        return True
+    return False
+
+
 def homedir():
     return os.environ["HOME"]
 
