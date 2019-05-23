@@ -69,36 +69,23 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Some bundles
 "
-Bundle "fholgado/minibufexpl.vim"
-Bundle 'scrooloose/nerdtree'
-Bundle "Shougo/vimproc.vim"
-Bundle "majutsushi/tagbar"
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'ap/vim-buftabline'
+Plugin 'rafi/awesome-vim-colorschemes'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 let python_highlight_all=1
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'Shougo/denite.nvim'
 
 
-
-" Bundle "dopuskh3/vim-git"
-
-" Bundle "derekwyatt/vim-scala"
-" Bundle "ryanss/vim-hackernews"
-
-" GO bundles
-" Bundle "Blackrush/vim-gocode"
-" Bundle "jnwhiteh/vim-golang"
-" Bundle "scrooloose/syntastic"
-" Bundle "dgryski/vim-godef"
-
-"Clojure bundles
-" Bundle 'guns/vim-clojure-static'
-
+call vundle#end()               " required
 
 " Tagbar configuration
 "
@@ -123,19 +110,6 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " Some custom functions
 "
-command -bang -nargs=? QFix call QFixToggle(<bang>0)
-function! QFixToggle(forced)
-  if exists("g:qfix_win") && a:forced == 0
-    cclose
-    unlet g:qfix_win
-  else
-    copen 10
-    let g:qfix_win = bufnr("$")
-  endif
-endfunction
-
-
-
 function! RTrim()
   let vw=winsaveview()
   %s/\v\s+$//e
@@ -146,12 +120,11 @@ endfunction
 
 " Keyboard mapping
 "
-map ;e :QFix<CR>
 map ;t :NERDTreeToggle<CR>
 map <F2> :NERDTreeToggle<CR>
-nnoremap <C-p> :Unite -start-insert -buffer-name=files file_rec<CR>
-nnoremap <space>/ :Unite grep:.<CR>
-nnoremap <C-space> :Unite -quick-match buffer<CR>
+nnoremap <C-p> :Files ./<CR>
+nnoremap <C-g> :Rg ./<CR>
+nnoremap <C-b> :Buffers<CR>
 map ;q :bp<CR>
 map ;w :bn<CR>
 map ;v gg=G<CR>
@@ -164,8 +137,6 @@ map ;s :sh<CR>
 map ;h :call MyPersonalHelp()<CR>
 map ;z :cp<CR>
 map ;x :cn<CR>
-map <F11> :call Insert_datetime()<CR>
-map ;fl :TMiniBufExplorer<CR>
 map <C-LeftMouse> <C-]>
 map <C-RightMouse> <C-T>
 

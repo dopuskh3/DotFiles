@@ -5,6 +5,7 @@ import datetime
 import subprocess
 import shutil
 import copy
+import math
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -15,6 +16,15 @@ def homedir():
 
 def dotfiledir():
     return os.path.join(os.path.dirname(__file__), '..')
+
+def which(*args):
+    result = 0
+    for arg in args:
+        res = subprocess.call(['which', arg])
+        result += abs(res)
+        if res != 0:
+            log.error("%s command missing", arg)
+    return result
 
 def _environ():
     env = copy.copy(os.environ)

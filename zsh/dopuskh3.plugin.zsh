@@ -1,5 +1,5 @@
 
 
-if `which nvim 2>&/dev/null`; then
-  alias vim=nvim
-fi
+#if which nvim >&/dev/null 2>&1 ; then
+#  alias vim=nvim
+#fi

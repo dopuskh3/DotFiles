@@ -11,6 +11,7 @@ brew_install(' '.join([
     'tmux',
     'fzf',
     'fpp',
-    'neovim',
+    'vim',
     'cmake',
+    'ripgrep',
     ]))
